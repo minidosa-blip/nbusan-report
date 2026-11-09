@@ -7,7 +7,7 @@
 <!-- v11 (형님 11/09): 교사구역 207~209는 짝 교육부서 보고로, 청년부는 210구역 보고로 채운 자리 — 미제출로 세지 않고 '○○ 보고에서'로 표시. 210구역 카드에 청년예배 인원·오후 청년모임. -->
 <!-- v7 (형님 11/08 오후): 보고 화면(구역·부서)과 같은 색 톤 — 따뜻한 무채색 바탕·흰 카드·강조색 하나. 구역 카드에 출석·결석 인원. 카드마다 구역/교육부서 이름표. 이 파일에는 슬래시-별표 주석을 쓰지 않는다. -->
 <style>
-:root{color-scheme:light;--bg:#f6f2ee;--card:#fff;--ink:#2b221d;--soft:#5d5048;--line:#e5dcd4;--field:#fbf9f7;--acc:#a8402a;--accbg:#f8ebe6;--accink:#8a3220;--ok:#256b45;--okbg:#e6f3ea;--okline:#3f9a68;--bar2:#8b8078;--shadow:0 1px 3px rgba(60,40,30,.07)}
+:root{color-scheme:light;--bg:#f6f2ee;--card:#fff;--ink:#2b221d;--soft:#5d5048;--line:#e5dcd4;--field:#fbf9f7;--acc:#a8402a;--accbg:#f8ebe6;--accink:#8a3220;--ok:#1b6a3c;--okbg:#d3f1de;--okline:#249a58;--bar2:#8b8078;--shadow:0 1px 3px rgba(60,40,30,.07)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;--acc:#ee9a80;--accbg:#3a2620;--accink:#ffc6b4;--ok:#9fe0b8;--okbg:#1d3326;--okline:#5fb486;--bar2:#8f847b;--shadow:none}}
 :root[data-theme=dark]{color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;--acc:#ee9a80;--accbg:#3a2620;--accink:#ffc6b4;--ok:#9fe0b8;--okbg:#1d3326;--okline:#5fb486;--bar2:#8f847b;--shadow:none}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;-webkit-text-size-adjust:100%;overflow-wrap:anywhere;word-break:keep-all}
@@ -32,7 +32,7 @@ h1{font-size:clamp(1.55rem,5vw,2.1rem);letter-spacing:-.03em;line-height:1.3;mar
 .unit{scroll-margin-top:16px}.unit-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .state{font-size:1rem;font-weight:700;color:var(--soft)}.kind{display:inline-block;font-size:1rem;font-weight:700;border-radius:8px;padding:0 8px;margin-right:8px;background:var(--accbg);color:var(--accink)}.head-right{display:flex;align-items:center;flex-wrap:wrap;gap:4px}.state.done{color:var(--ink)}.state.todo{color:var(--accink)}.hint.from{margin:0 0 8px}
 .st-chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin:6px 0 4px}.st-chips .chip{justify-content:center;text-align:center;white-space:nowrap;padding:6px 4px;min-width:0}
-.chip.done{border-color:var(--okline);color:var(--ok);background:var(--okbg)}.chip.todo{border-color:var(--acc);color:var(--accink);background:var(--accbg)}.chip .ck{margin-right:6px;font-weight:800}
+.chip.done{border-color:var(--okline);color:var(--ok);background:var(--okbg)}.chip.todo{border-color:var(--acc);color:var(--accink);background:var(--accbg)}.chip{position:relative}.chip .ck{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-weight:800}
 .st-title{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin:0 0 6px}.st-title h2{margin:0}
 .legend2{display:flex;gap:12px;font-size:1rem;font-weight:700;color:var(--soft)}.legend2 .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}.dot.done{background:var(--okline)}.dot.todo{background:var(--acc)}
 .st-list{list-style:none;margin:4px 0 0;padding:0}.st-list li{border-top:1px solid var(--line)}.st-list li:first-child{border-top:0}
