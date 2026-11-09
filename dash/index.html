@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko"><head><base target="_top"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow"><title>북부산성결교회 주간 목양 보고</title>
+<!-- v14 (형님 11/09 12:4x, 예전 칩 화면 사진으로 다시 정함): '보고서 제출 현황' 카드 — 제목 줄에 색 표시 설명(● 제출 ● 미제출), 아래에 모든 구역·교육부서를 예전처럼 칩으로. 칩 색으로 제출/미제출을 가르고(제출 칩에는 ✓도), 어느 칩이든 누르면 아래 그 자리로 간다. 카드 머리는 v13대로 '제출'/'미제출' 한 낱말. -->
 <!-- v13 (형님 11/09 12:1x·12:2x): '보고서가 아직 안 온 곳'을 없애고 모든 구역·교육부서를 한 줄씩 '제출(보낸 시각)/미제출'로 보이는 '보고 현황' 목록으로 바꿈. 카드 머리에는 상태 한 낱말('제출'/'미제출')만 — 구역/교육부서 이름표 없음. -->
 <!-- v11 (형님 11/09): 교사구역 207~209는 짝 교육부서 보고로, 청년부는 210구역 보고로 채운 자리 — 미제출로 세지 않고 '○○ 보고에서'로 표시. 210구역 카드에 청년예배 인원·오후 청년모임. -->
 <!-- v7 (형님 11/08 오후): 보고 화면(구역·부서)과 같은 색 톤 — 따뜻한 무채색 바탕·흰 카드·강조색 하나. 구역 카드에 출석·결석 인원. 카드마다 구역/교육부서 이름표. 이 파일에는 슬래시-별표 주석을 쓰지 않는다. -->
 <style>
-:root{color-scheme:light;--bg:#f6f2ee;--card:#fff;--ink:#2b221d;--soft:#5d5048;--line:#e5dcd4;--field:#fbf9f7;--acc:#a8402a;--accbg:#f8ebe6;--accink:#8a3220;--bar2:#8b8078;--shadow:0 1px 3px rgba(60,40,30,.07)}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;--acc:#ee9a80;--accbg:#3a2620;--accink:#ffc6b4;--bar2:#8f847b;--shadow:none}}
-:root[data-theme=dark]{color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;--acc:#ee9a80;--accbg:#3a2620;--accink:#ffc6b4;--bar2:#8f847b;--shadow:none}
+:root{color-scheme:light;--bg:#f6f2ee;--card:#fff;--ink:#2b221d;--soft:#5d5048;--line:#e5dcd4;--field:#fbf9f7;--acc:#a8402a;--accbg:#f8ebe6;--accink:#8a3220;--ok:#256b45;--okbg:#e6f3ea;--okline:#3f9a68;--bar2:#8b8078;--shadow:0 1px 3px rgba(60,40,30,.07)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;--acc:#ee9a80;--accbg:#3a2620;--accink:#ffc6b4;--ok:#9fe0b8;--okbg:#1d3326;--okline:#5fb486;--bar2:#8f847b;--shadow:none}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;--acc:#ee9a80;--accbg:#3a2620;--accink:#ffc6b4;--ok:#9fe0b8;--okbg:#1d3326;--okline:#5fb486;--bar2:#8f847b;--shadow:none}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;-webkit-text-size-adjust:100%;overflow-wrap:anywhere;word-break:keep-all}
 .wrap{max-width:1120px;margin:auto;padding:24px 16px 56px}
 h1{font-size:clamp(1.55rem,5vw,2.1rem);letter-spacing:-.03em;line-height:1.3;margin:2px 0 0}h2{font-size:1.25rem;letter-spacing:-.02em;line-height:1.4;margin:0 0 12px;padding-left:12px;border-left:4px solid var(--acc)}h3{font-size:1.1rem;margin:0}h4{font-size:1rem;margin:0 0 4px;color:var(--soft);font-weight:700}p{margin:6px 0}
@@ -28,6 +29,9 @@ h1{font-size:clamp(1.55rem,5vw,2.1rem);letter-spacing:-.03em;line-height:1.3;mar
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.grid>.card{margin:0}
 .unit{scroll-margin-top:16px}.unit-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .state{font-size:1rem;font-weight:700;color:var(--soft)}.kind{display:inline-block;font-size:1rem;font-weight:700;border-radius:8px;padding:0 8px;margin-right:8px;background:var(--accbg);color:var(--accink)}.head-right{display:flex;align-items:center;flex-wrap:wrap;gap:4px}.state.done{color:var(--ink)}.state.todo{color:var(--accink)}.hint.from{margin:0 0 8px}
+.chip.done{border-color:var(--okline);color:var(--ok);background:var(--okbg)}.chip.todo{border-color:var(--acc);color:var(--accink);background:var(--accbg)}.chip .ck{margin-right:6px;font-weight:800}
+.st-title{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin:0 0 6px}.st-title h2{margin:0}
+.legend2{display:flex;gap:12px;font-size:1rem;font-weight:700;color:var(--soft)}.legend2 .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}.dot.done{background:var(--okline)}.dot.todo{background:var(--acc)}
 .st-list{list-style:none;margin:4px 0 0;padding:0}.st-list li{border-top:1px solid var(--line)}.st-list li:first-child{border-top:0}
 .st-row{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:48px;padding:6px 2px;color:var(--ink);text-decoration:none}
 .st-name{font-weight:700;min-width:0}.st{flex:none;font-weight:800;font-size:1rem;border-radius:8px;padding:2px 10px;white-space:nowrap}
@@ -185,21 +189,18 @@ function render(data) {
     ${tile('watch-section', none ? dash : `${shortTerm.length}<small>명</small>`, '2주 연속 결석', none ? '보고 전' : '2~11주 · 장결자는 따로')}
     ${tile('long-section', none ? dash : `${longTerm.length}<small>명</small>`, '장결자', '12주 이상 연속')}</section>`;
 
-  // v13 (형님 11/09 12:1x): 보고 현황 — 모든 구역(먼저)·교육부서를 명단 순서대로 한 줄씩, '제출(보낸 시각)' 또는 '미제출'.
-  // 제출한 곳은 눌러서 아래 그 보고 카드로 간다. 다른 보고로 채우는 자리(교사구역·청년부)는 보고자가 아니라 넣지 않는다(위 숫자와 같은 기준).
-  const two = n => String(n).padStart(2, '0');
-  const when = ms => { if (!ms) return ''; const d = new Date(ms); return `${d.getMonth() + 1}/${d.getDate()} ${two(d.getHours())}:${two(d.getMinutes())}`; };
-  const statusRow = u => {
-    const r = byId[u.id];
-    return r && !r.derived
-      ? `<li><a class="st-row" href="#${anchor(u)}"><span class="st-name">${esc(u.name)}</span><span class="st done">제출${r.sortTime ? `<small>${esc(when(r.sortTime))}</small>` : ''}</span></a></li>`
-      : `<li><div class="st-row"><span class="st-name">${esc(u.name)}</span><span class="st todo">미제출</span></div></li>`;
+  // v14 (형님 11/09 12:4x): 보고서 제출 현황 — 예전 칩 화면 그대로 모든 구역(먼저)·교육부서를 명단 순서로. 칩 색 = 제출(초록)/미제출(붉은색),
+  // 색을 잘 구별하기 어려운 분을 위해 제출 칩에는 ✓를 붙인다. 어느 칩이든 누르면 아래 그 카드로 간다.
+  // 다른 보고로 채우는 자리(교사구역·청년부)는 보고자가 아니라 넣지 않는다(위 숫자와 같은 기준).
+  const chip = u => {
+    const r = byId[u.id], done = !!(r && !r.derived);
+    return `<a class="chip ${done ? 'done' : 'todo'}" href="#${anchor(u)}" aria-label="${esc(u.name)} ${done ? '제출' : '미제출'}">${done ? '<span class="ck" aria-hidden="true">✓</span>' : ''}${esc(u.name)}</a>`;
   };
   const listZ = zoneUnits.filter(u => !u.derivedFrom), listD = deptUnits.filter(u => !u.derivedFrom);
-  const status = `<section class="card" id="status-section"><h2>보고 현황 <span class="count">${s.completed} / ${s.expected}</span></h2>
-    <p class="group-label">구역 ${s.zone.completed} / ${s.zone.expected}</p><ul class="st-list">${listZ.map(statusRow).join('')}</ul>
-    <p class="group-label" style="margin-top:14px">교육부서 ${s.dept.completed} / ${s.dept.expected}</p><ul class="st-list">${listD.map(statusRow).join('')}</ul>
-    <p class="hint">제출한 곳을 누르면 아래 그 보고로 갑니다. 시각은 마지막으로 보낸 때입니다.</p></section>`;
+  const status = `<section class="card" id="status-section"><div class="st-title"><h2>보고서 제출 현황</h2><span class="legend2" aria-hidden="true"><span><i class="dot done"></i>제출</span><span><i class="dot todo"></i>미제출</span></span></div>
+    <p class="group-label">구역 ${listZ.length}</p><div class="chips">${listZ.map(chip).join('')}</div>
+    <p class="group-label">교육부서 ${listD.length}</p><div class="chips">${listD.map(chip).join('')}</div>
+    <p class="hint">이름을 누르면 아래 그 구역·부서 자리로 갑니다.</p></section>`;
 
   const urgent = `<section class="card" id="urgent-section"><h2>먼저 살펴볼 소식 <span class="count">${data.urgent.length}건</span></h2><p class="hint">입원·수술·장례 같은 낱말이 들어간 기록입니다. 내용을 직접 확인해 주세요.</p>
     ${data.urgent.length ? data.urgent.map(item => `<div class="alert"><strong>${esc(item.unit)} · ${fieldNames[item.field] || '소식'}</strong><p>${esc(item.text)}</p></div>`).join('') : '<p>해당 낱말이 들어간 기록이 없습니다.</p>'}</section>`;
