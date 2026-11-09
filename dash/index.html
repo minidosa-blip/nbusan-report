@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko"><head><base target="_top"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow"><title>북부산성결교회 주간 목양 보고</title>
+<!-- v16 (형님 11/09 12:5x 바로잡음 두 번): 최근 12주 출석률의 부서 고르기를 예전 그대로 되살린다(처음엔 교육부서 합계, 부서를 고르면 그 부서 선이 함께). 옆의 '함께 볼 부서' 글자만 없앤다. 주마다 늘어놓은 숫자 줄과 어려운 설명은 v15대로 없앤 채. -->
 <!-- v15 (형님 11/09 12:2x 사진): 다른 보고로 채우는 교육부서 자리(청년부)는 '청년부 (210구역)'처럼 어느 보고에서 채웠는지 이름에 괄호로 붙인다(카드·출석 막대). 최근 12주 출석률에서 '함께 볼 부서' 고르기와 '고른 부서' 표시를 없애고 교육부서 합계만 그린다. 그래프 밑 어려운 설명과 주마다 늘어놓은 숫자 줄을 없애고, 그릴 주가 하나도 없으면 쉬운 말 한 줄만. 화면 전체에서 '재적·확인 불가·선을 잇지' 같은 말을 쉬운 말로 바꿈(형님 12:3x). -->
 <!-- v14 (형님 11/09 12:4x, 예전 칩 화면 사진으로 다시 정함): '보고서 제출 현황' 카드 — 제목 줄에 색 표시 설명(● 제출 ● 미제출), 아래에 모든 구역·교육부서를 예전처럼 칩으로. 칩 색으로 제출/미제출을 가르고(제출 칩에는 ✓도), 어느 칩이든 누르면 아래 그 자리로 간다. 카드 머리는 v13대로 '제출'/'미제출' 한 낱말. -->
 <!-- v13 (형님 11/09 12:1x·12:2x): '보고서가 아직 안 온 곳'을 없애고 모든 구역·교육부서를 한 줄씩 '제출(보낸 시각)/미제출'로 보이는 '보고 현황' 목록으로 바꿈. 카드 머리에는 상태 한 낱말('제출'/'미제출')만 — 구역/교육부서 이름표 없음. -->
@@ -102,6 +103,11 @@ function bars(reports) {
   return svg+'</svg><p class="hint">— 는 인원 숫자가 비어 있어 비율을 낼 수 없다는 뜻입니다.</p>';
 }
 
+// v15·v16: 그릴 주가 하나도 없으면 쉬운 말 한 줄. 부서를 골랐으면 합계나 그 부서 중 하나라도 있으면 그린다.
+function trendChart(data, id) {
+  const has = data.trend.some(p => p.overall != null || (id && p.units[id] != null));
+  return has ? lineChart(data, id) : '<p class="hint">아직 쌓인 보고가 없어 그래프가 비어 있습니다.</p>';
+}
 function lineChart(data, unitId) {
   const w=Math.max(280,Math.min(800,innerWidth-68)),h=230,left=42,right=20,top=18,bottom=40,pw=w-left-right,ph=h-top-bottom;
   let svg=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="교육부서 최근 12주 출석률 추이, 0부터 100퍼센트" data-chart="trend">`;
@@ -234,13 +240,14 @@ function render(data) {
   const eduSec = `<section class="section" id="education-section"><div class="section-head"><h2>교육부서 보고</h2><span class="count">보고서 ${d.completed} / ${d.expected}</span></div>
     <article class="card"><h3>출석 현황</h3><div class="edu-sum"><div><b>${edu.length ? d.present : '—'} / ${edu.length ? d.total : '—'}</b><span class="soft">학생·교사 출석 / 전체 인원 (명)</span></div><div><b>${pct(d.rate)}</b><span class="soft">출석률 · 보고한 부서 기준</span></div><div><b>${s.newcomerItems}건</b><span class="soft">새 친구 기록</span></div></div>
       <p class="hint">학생과 교사를 합한 값입니다.${d.completeCounts ? '' : ' 인원 숫자를 비워 둔 부서가 있어 실제보다 적게 보일 수 있습니다.'}</p><div class="legend"><span><i></i>학생</span><span><i class="teacher"></i>교사</span></div>${bars(edu)}</article>
-    <article class="card"><div class="section-head" style="margin-bottom:6px"><h3>최근 12주 출석률</h3></div>
-      <div class="legend"><span><i></i>교육부서 합계</span></div><div id="trend-chart">${data.trend.some(p => p.overall != null) ? lineChart(data, '') : '<p class="hint">아직 쌓인 보고가 없어 그래프가 비어 있습니다.</p>'}</div></article>
+    <article class="card"><div class="section-head" style="margin-bottom:6px"><h3>최근 12주 출석률</h3><select id="trend-unit" aria-label="그래프에 함께 그릴 부서"><option value="">교육부서 합계만</option>${deptUnits.map(u => `<option value="${esc(u.id)}">${esc(slotName(u))}</option>`).join('')}</select></div>
+      <div class="legend"><span><i></i>교육부서 합계</span><span><i class="unit-line"></i>고른 부서</span></div><div id="trend-chart">${trendChart(data, '')}</div></article>
     ${deptUnits.length ? `<div class="grid">${deptUnits.map(u => byId[u.id] ? (byId[u.id].derived ? youthDeptCard(byId[u.id]) : deptCard(byId[u.id])) : missingCard(u)).join('')}</div>` : ''}</section>`;
 
   const prayers = `<section class="section card" id="prayer-section"><h2>교육부서 기도제목</h2>${data.prayers.length ? `<ul class="list">${data.prayers.map(p => `<li><span class="who">${esc(p.unit)}</span><p style="white-space:pre-wrap;margin:2px 0 0">${esc(p.text)}</p></li>`).join('')}</ul>` : '<p class="hint">이 주일에 적힌 교육부서 기도제목이 없습니다.</p>'}</section>`;
 
   $('content').innerHTML = tiles + status + urgent + fresh + absent + watch + zoneSec + eduSec + prayers;
+  $('trend-unit').addEventListener('change', e => { $('trend-chart').innerHTML = trendChart(current, e.target.value); });   // v16: 예전 동작(주마다 숫자 줄은 v15대로 없음)
 }
 
 function load(date) {
