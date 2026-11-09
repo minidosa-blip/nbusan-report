@@ -29,6 +29,7 @@ h1{font-size:clamp(1.55rem,5vw,2.1rem);letter-spacing:-.03em;line-height:1.3;mar
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.grid>.card{margin:0}
 .unit{scroll-margin-top:16px}.unit-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .state{font-size:1rem;font-weight:700;color:var(--soft)}.kind{display:inline-block;font-size:1rem;font-weight:700;border-radius:8px;padding:0 8px;margin-right:8px;background:var(--accbg);color:var(--accink)}.head-right{display:flex;align-items:center;flex-wrap:wrap;gap:4px}.state.done{color:var(--ink)}.state.todo{color:var(--accink)}.hint.from{margin:0 0 8px}
+.st-chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin:6px 0 4px}.st-chips .chip{justify-content:center;text-align:center;white-space:nowrap;padding:6px 4px;min-width:0}
 .chip.done{border-color:var(--okline);color:var(--ok);background:var(--okbg)}.chip.todo{border-color:var(--acc);color:var(--accink);background:var(--accbg)}.chip .ck{margin-right:6px;font-weight:800}
 .st-title{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin:0 0 6px}.st-title h2{margin:0}
 .legend2{display:flex;gap:12px;font-size:1rem;font-weight:700;color:var(--soft)}.legend2 .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}.dot.done{background:var(--okline)}.dot.todo{background:var(--acc)}
@@ -198,8 +199,8 @@ function render(data) {
   };
   const listZ = zoneUnits.filter(u => !u.derivedFrom), listD = deptUnits.filter(u => !u.derivedFrom);
   const status = `<section class="card" id="status-section"><div class="st-title"><h2>보고서 제출 현황</h2><span class="legend2" aria-hidden="true"><span><i class="dot done"></i>제출</span><span><i class="dot todo"></i>미제출</span></span></div>
-    <p class="group-label">구역 ${listZ.length}</p><div class="chips">${listZ.map(chip).join('')}</div>
-    <p class="group-label">교육부서 ${listD.length}</p><div class="chips">${listD.map(chip).join('')}</div>
+    <p class="group-label">구역 ${listZ.length}</p><div class="chips st-chips">${listZ.map(chip).join('')}</div>
+    <p class="group-label">교육부서 ${listD.length}</p><div class="chips st-chips">${listD.map(chip).join('')}</div>
     <p class="hint">이름을 누르면 아래 그 구역·부서 자리로 갑니다.</p></section>`;
 
   const urgent = `<section class="card" id="urgent-section"><h2>먼저 살펴볼 소식 <span class="count">${data.urgent.length}건</span></h2><p class="hint">입원·수술·장례 같은 낱말이 들어간 기록입니다. 내용을 직접 확인해 주세요.</p>
