@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><base target="_top">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow">
+<title>임직 후보 평가서</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#f4f1ec;--paper:#fffefb;--ink:#2a2622;--soft:#6c655c;--line:#e2dbd0;
+  --acc:#5b3d7a;--accsoft:#efe8f5;--star:#c98a12;--ok:#2f6b4f;
+  --f-display:"Gowun Batang","Noto Serif KR",serif;
+  --f-body:"Noto Sans KR","Malgun Gothic",AppleGothic,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#191719;--paper:#232025;--ink:#eee8e2;--soft:#a9a19a;--line:#3a353c;
+  --acc:#c6a8e6;--accsoft:#2f2838;--star:#f0b33d;--ok:#7fcaa5;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#191719;--paper:#232025;--ink:#eee8e2;--soft:#a9a19a;--line:#3a353c;
+  --acc:#c6a8e6;--accsoft:#2f2838;--star:#f0b33d;--ok:#7fcaa5;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 60px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header h1{font-family:var(--f-display);font-size:28px;margin:0;color:var(--acc);text-wrap:balance}
+header p{margin:4px 0 0;color:var(--soft);font-size:15px}
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 16px;display:flex;flex-direction:column;gap:12px}
+label.t{font-weight:700}
+input[type=text],textarea{width:100%;font:inherit;font-size:17px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:84px;resize:vertical}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:8px;overflow-x:auto;padding-block:8px}
+nav.tabs button{font:inherit;font-size:15px;white-space:nowrap;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+nav.tabs button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--paper);font-weight:700}
+.group-h{font-family:var(--f-display);font-size:21px;margin:8px 0 0;color:var(--ink)}
+.group-note{margin:0;color:var(--soft);font-size:15px}
+div[id^="g-"]+div[id^="g-"]{margin-top:40px}
+.cand-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:8px}
+.cand-h h3{margin:0;font-family:var(--f-display);font-size:22px}
+.cand-h .office{color:var(--soft);font-size:14px}
+.state{font-size:13px;border-radius:999px;padding:2px 10px;background:var(--accsoft);color:var(--acc);font-weight:700}
+.state.done{background:transparent;border:1px solid var(--ok);color:var(--ok)}
+.crit{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line)}
+.crit .name{min-width:0}
+.crit .ref{display:block;font-size:13px;color:var(--soft)}
+.cat{margin:10px 0 0;font-weight:700;color:var(--acc);font-family:var(--f-display);font-size:18px}.cat span{font-family:var(--f-body);font-size:13px;color:var(--soft);font-weight:400}
+.stars{display:flex;gap:2px}
+.stars button{font-size:28px;line-height:1;background:none;border:0;padding:4px 2px;cursor:pointer;color:var(--line);min-width:40px;min-height:44px}
+.stars button.on{color:var(--star)}
+@media (max-width:420px){.crit{grid-template-columns:minmax(0,1fr)}.stars button{min-width:36px;font-size:26px}}
+.rec{display:flex;gap:8px;flex-wrap:wrap}
+.rec label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.rec input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;margin:0;border:2px solid var(--soft);border-radius:50%;background:var(--paper);display:grid;place-items:center;cursor:pointer}.rec input:checked{border-color:var(--acc)}.rec input:checked::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--acc)}.rec label:has(input:checked){border-color:var(--acc);background:var(--accsoft);font-weight:700}
+.avg{font-variant-numeric:tabular-nums;color:var(--soft);font-size:15px}
+.send pre{white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;font-family:var(--f-body);font-size:15px;max-height:340px;overflow:auto;margin:0}
+.btn{font:inherit;font-size:18px;font-weight:700;border:0;border-radius:12px;padding:14px;background:var(--acc);color:var(--paper);cursor:pointer;width:100%}
+.msg{margin:0;color:var(--ok);font-weight:700;min-height:1.6em}
+.hint{margin:0;color:var(--soft);font-size:15px}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--soft)}
+.q h3{margin:0;font-size:18px;line-height:1.45}.q .qno{color:var(--acc);font-weight:700;margin-right:4px}
+.q .desc{margin:0;color:var(--soft);font-size:15px}
+.prow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:4px 0;border-top:1px dashed var(--line)}
+.prow .pn{font-weight:700;min-width:0}.prow .pn small{font-weight:400;color:var(--soft);font-size:13px;margin-left:4px}
+@media (max-width:420px){.prow{grid-template-columns:minmax(0,1fr)}}
+.recbox{display:flex;flex-direction:column;gap:8px;padding-top:10px;border-top:1px solid var(--line)}
+.recbox:first-of-type{border-top:0;padding-top:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+<div class="wrap">
+<header>
+  <h1>임직 후보 평가서</h1>
+  <p>기독교대한성결교회 북부산교회 · 당회원용 · 2026년 11월</p>
+</header>
+
+<section class="sheet" aria-labelledby="who-l">
+  <label class="t" id="who-l" for="who">평가하시는 분 성함</label>
+  <input type="text" id="who" autocomplete="name" placeholder="예: 홍길동 장로">
+  <p class="hint">문항마다 아래에 후보 이름이 나란히 있습니다. 문항을 한 번 읽으시고 이름마다 별(1~5개)을 주세요. 묶음 끝에서 후보마다 추천 여부와 하고 싶은 말씀을 남겨 주세요. 다 하신 뒤 맨 아래 [보내기]를 누르시면 끝입니다. 쓰시던 내용은 이 휴대폰에 저장되니 나눠서 하셔도 됩니다.</p>
+  <div class="legend"><span>★ 1 많이 부족함</span><span>2 부족함</span><span>3 보통</span><span>4 좋음</span><span>5 매우 좋음</span></div>
+</section>
+
+<nav class="tabs" id="tabs" aria-label="후보 묶음"></nav>
+<div id="groups"></div>
+
+<section class="sheet send" id="send" aria-labelledby="send-h">
+  <h2 class="group-h" id="send-h">평가 보내기</h2>
+  <p class="hint" id="progress"></p>
+  <button type="button" class="btn" id="go">보내기</button>
+  <p class="msg" id="sent" role="status"></p>
+  <p class="hint">보내신 뒤에 고칠 것이 있으면 고쳐서 다시 [보내기]를 누르시면 됩니다. 마지막에 보내신 평가가 담임목사님께 전해집니다.</p>
+</section>
+</div>
+
+<script src="../config.js"></script>
+<script src="../api.js"></script>
+<script>
+(function(){
+  // v12: 링크에 요약 열쇠(k)가 있으면 담임목사님 요약 화면, 없으면 평가서.
+  var viewKey = NBAPI.param('k');
+  if (viewKey) {
+    NBAPI.start('eval', 'summary', { k: viewKey }, function (d) { document.title = '임직 후보 평가 요약'; document.body.innerHTML = '<div style="max-width:900px;margin:0 auto">' + d.html + '</div>'; });
+    return;
+  }
+  NBAPI.start('eval', 'boot', {}, function (D) {
+  var google = { script: { run: NBAPI.runner({ submit: function (p) { return NBAPI.post('eval', 'submit', p); } }) } };
+  // Candidates (owner TG 11/07). Elder candidates were recommended by members; deacon/kwonsa names submitted a pledge of devotion.
+  // Owner 11/08: read each question once and star every candidate under it.
+  // 장로 후보 keep all items; 안수집사·권사 후보 answer one question per 갈래 (5), and that score fills every item of the 갈래
+  // so the server, the response columns and earlier answers stay exactly as before.
+  var SIMPLE = {"안수집사 후보": true, "권사 후보": true};
+  var GROUPS = [], REC = D.recs, LEN = {};
+  function critOf(title){ var out = []; D.sets[title].forEach(function(c, ci){ c[2].forEach(function(it, k){ out.push([it[0], it[1], ci, k]); }); }); return out; }
+  function zeros(n){ var z = []; for (var q = 0; q < n; q++) z.push(0); return z; }
+  var NOTES = {"장로 후보":"성도들의 추천을 받은 분들입니다.","안수집사 후보":"헌신의 서약서를 내신 분들입니다. 갈래마다 한 문항씩, 다섯 문항입니다.","권사 후보":"헌신의 서약서를 내신 분들입니다. 갈래마다 한 문항씩, 다섯 문항입니다."};
+  D.candidates.forEach(function(c, idx){
+    var g = GROUPS.filter(function(x){ return x.title === c[0]; })[0];
+    if (!g) {
+      g = {id:"g" + GROUPS.length, title:c[0], note:NOTES[c[0]] || "", people:[], cats:D.sets[c[0]], crit:critOf(c[0]), simple:!!SIMPLE[c[0]]};
+      // Questions shown on screen: every item (full) or one per 갈래 (simple).
+      g.qs = g.simple
+        ? g.cats.map(function(ct, ci){ return {title:ct[0], desc:ct[2].map(function(it){ return it[0]; }).join(" · "), cat:ci, first:true}; })
+        : g.crit.map(function(c){ return {title:c[0], desc:c[1], cat:c[2], first:c[3] === 0, no:(c[2]+1)+"-"+(c[3]+1)}; });
+      GROUPS.push(g);
+    }
+    g.people.push([c[1], c[2], idx, c[3] || '']);
+  });
+  GROUPS.forEach(function(g){ g.people.forEach(function(p,i){ LEN[g.id + "-" + i] = g.crit.length; }); });
+  var KEY = "nbusan_officer_eval_gas_v5";
+  var S = {who:"", c:{}};
+  try { var raw = localStorage.getItem(KEY); if (raw) S = JSON.parse(raw) || S; } catch(e) {}
+  if (!S.c) S.c = {};
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} render(); }
+  function cid(g,i){ return g.id + "-" + i; }
+  function groupOf(id){ return GROUPS.filter(function(g){ return id.indexOf(g.id + "-") === 0; })[0]; }
+  // Per-candidate record. s = item scores (what the server gets). Simple groups also keep q = one score per 갈래.
+  function rec(id){
+    var r = S.c[id] || (S.c[id] = {s:zeros(LEN[id]), r:"", m:""}), g = groupOf(id);
+    if (g.simple && !r.q) {   // earlier item-by-item answers on this phone become the 갈래 score (rounded mean)
+      r.q = g.cats.map(function(ct, ci){ var v = g.crit.map(function(c, k){ return c[2] === ci ? r.s[k] : 0; }).filter(function(x){ return x > 0; });
+        return v.length ? Math.round(v.reduce(function(a,b){return a+b;},0) / v.length) : 0; });
+    }
+    return r;
+  }
+  function score(id, k){ var r = rec(id); return groupOf(id).simple ? r.q[k] : r.s[k]; }
+  function setScore(id, k, n){
+    var r = rec(id), g = groupOf(id);
+    if (g.simple) { r.q[k] = (r.q[k] === n ? 0 : n); g.crit.forEach(function(c, j){ if (c[2] === k) r.s[j] = r.q[k]; }); }
+    else r.s[k] = (r.s[k] === n ? 0 : n);
+  }
+  function answers(id){ var g = groupOf(id); return g.qs.map(function(_, k){ return score(id, k); }); }
+  function done(id){ return !!S.c[id] && answers(id).every(function(v){return v>0;}) && !!S.c[id].r; }
+  function avg(id){ if(!S.c[id]) return null; var v = answers(id).filter(function(x){return x>0;}); return v.length ? v.reduce(function(a,b){return a+b;},0)/v.length : null; }
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  var who = document.getElementById("who");
+  who.value = S.who || "";
+  who.addEventListener("input", function(){ S.who = who.value; save(); });
+
+  var tabs = document.getElementById("tabs"), box = document.getElementById("groups");
+  tabs.innerHTML = GROUPS.map(function(g){ return '<button type="button" data-g="'+g.id+'">'+esc(g.title)+'</button>'; }).join("") + '<button type="button" data-g="send">보내기</button>';
+  tabs.addEventListener("click", function(e){ var b = e.target.closest("button"); if(!b) return;
+    var el = document.getElementById(b.dataset.g === "send" ? "send" : "g-" + b.dataset.g); if (el) el.scrollIntoView({behavior:"smooth", block:"start"}); });
+
+  function stars(id, k, label){
+    return '<span class="stars" role="radiogroup" aria-label="'+esc(label)+'">' + [1,2,3,4,5].map(function(n){
+      return '<button type="button" role="radio" data-id="'+id+'" data-k="'+k+'" data-n="'+n+'" aria-label="별 '+n+'개">★</button>'; }).join("") + '</span>';
+  }
+  box.innerHTML = GROUPS.map(function(g){
+    var qs = g.qs.map(function(q, k){
+      var head = (!g.simple && q.first) ? '<p class="cat">'+(q.cat+1)+'. '+esc(g.cats[q.cat][0])+(g.cats[q.cat][1] ? ' <span>'+esc(g.cats[q.cat][1])+'</span>' : '')+'</p>' : '';
+      return head + '<section class="sheet q"><h3><span class="qno">'+(g.simple ? (k+1)+'.' : q.no)+'</span>'+esc(q.title)+'</h3>' +
+        (g.simple && g.cats[q.cat][1] ? '<p class="desc">'+esc(g.cats[q.cat][1])+'</p>' : '') +
+        (q.desc ? '<p class="desc">'+esc(q.desc)+'</p>' : '') +
+        g.people.map(function(p, i){ return '<div class="prow"><span class="pn">'+esc(p[0])+'<small>'+esc(p[1])+'</small></span>'+stars(cid(g,i), k, p[0]+' · '+q.title)+'</div>'; }).join("") + '</section>';
+    }).join("");
+    var recs = '<section class="sheet"><h3 style="margin:0;font-family:var(--f-display);font-size:20px">추천 여부와 하고 싶은 말씀</h3>' + g.people.map(function(p, i){
+      var id = cid(g,i);
+      return '<div class="recbox"><div class="cand-h"><h3>'+esc(p[0])+' <span class="office">'+esc(p[1])+(p[3] ? ' · '+esc(p[3]) : '')+'</span></h3><span class="state" id="st-'+id+'"></span></div>' +
+        '<span class="avg" id="avg-'+id+'"></span><div class="rec">' + REC.map(function(r,j){
+          return '<label><input type="radio" name="rec-'+id+'" id="rec-'+id+'-'+j+'" value="'+r+'" data-id="'+id+'">'+r+'</label>'; }).join("") + '</div>' +
+        '<label class="t" for="m-'+id+'">하고 싶은 말씀</label><textarea id="m-'+id+'" data-id="'+id+'" placeholder="이 분에 대해 담임목사님께 전하고 싶은 말씀(선택)"></textarea></div>';
+    }).join("") + '</section>';
+    return '<div id="g-'+g.id+'" style="display:flex;flex-direction:column;gap:12px;scroll-margin-top:64px"><h2 class="group-h">'+esc(g.title)+'</h2><p class="group-note">'+esc(g.note)+'</p>' + qs + recs + '</div>';
+  }).join("");
+
+  box.addEventListener("click", function(e){
+    // Owner 11/08: tapping the chosen 추천 여부 again clears it.
+    var x = e.target.closest(".rec input"); if (x && S.c[x.dataset.id] && S.c[x.dataset.id].r === x.value) { S.c[x.dataset.id].r = ""; x.checked = false; save(); return; }
+    var b = e.target.closest(".stars button"); if(!b) return;
+    setScore(b.dataset.id, +b.dataset.k, +b.dataset.n); save(); });
+  box.addEventListener("change", function(e){ if (e.target.type === "radio") { rec(e.target.dataset.id).r = e.target.value; save(); } });
+  box.addEventListener("input", function(e){ if (e.target.tagName === "TEXTAREA") { rec(e.target.dataset.id).m = e.target.value; try{localStorage.setItem(KEY, JSON.stringify(S));}catch(x){} renderOut(); } });
+
+  function renderOut(){
+    var total = 0, fin = 0;
+    GROUPS.forEach(function(g){ g.people.forEach(function(p,i){ total++; if (done(cid(g,i))) fin++; }); });
+    document.getElementById("progress").textContent = "모두 " + total + "분 가운데 " + fin + "분 평가를 마치셨습니다. 다 못 하셨어도 하신 만큼 보낼 수 있습니다.";
+  }
+  function render(){
+    GROUPS.forEach(function(g){ g.people.forEach(function(p,i){
+      var id = cid(g,i), started = !!S.c[id], r = started ? rec(id) : {r:"", m:""}, a = avg(id);
+      document.querySelectorAll('.stars button[data-id="'+id+'"]').forEach(function(b){
+        var v = started ? score(id, +b.dataset.k) : 0;
+        b.classList.toggle("on", +b.dataset.n <= v); b.setAttribute("aria-checked", +b.dataset.n === v ? "true" : "false"); });
+      document.querySelectorAll('input[name="rec-'+id+'"]').forEach(function(x){ x.checked = x.value === r.r; });
+      var ta = document.getElementById("m-"+id); if (ta && document.activeElement !== ta) ta.value = r.m || "";
+      var st = document.getElementById("st-"+id); st.textContent = done(id) ? "완료" : "진행중"; st.classList.toggle("done", done(id));
+      if (!started || (!answers(id).some(function(v){return v>0;}) && !r.r)) st.textContent = "아직";
+      document.getElementById("avg-"+id).textContent = a == null ? "" : "평균 " + a.toFixed(1) + "점";
+    }); });
+    renderOut();
+  }
+  document.getElementById("go").addEventListener("click", function(){
+    var btn = this, m = document.getElementById("sent");
+    if (!S.who.trim()) { m.textContent = "맨 위에 평가하시는 분 성함을 적어 주세요."; who.focus(); return; }
+    var items = [];
+    GROUPS.forEach(function(g){ g.people.forEach(function(p,i){ var id = cid(g,i); if (S.c[id]) { var r = rec(id); items.push({i:p[2], s:r.s, r:r.r, m:r.m}); } }); });
+    btn.disabled = true; m.textContent = "보내는 중입니다…";
+    google.script.run.withSuccessHandler(function(res){ btn.disabled = false; m.textContent = "보냈습니다. 감사합니다. (" + res.count + "분 평가 · " + res.at + ")"; })
+      .withFailureHandler(function(err){ btn.disabled = false; m.textContent = "보내지 못했습니다: " + (err && err.message ? err.message : "잠시 뒤 다시 눌러 주세요."); })
+      .submit({who:S.who, items:items});
+  });
+  render();
+  });
+})();
+</script>
+</body></html>

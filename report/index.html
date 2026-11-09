@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow">
+<title>북부산성결교회 보고</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<!-- v9 = v7 + 명단에 새 이름 넣기(형님 11/08 1안). v7 구역장·부장 앱 = v6 + 명단의 모든 이름에 [출석][결석]을 고르는 방식(구역·부서 같음) + 구역·부서·모아보기 한 가지 색 톤(따뜻한 무채색 바탕·흰 카드·강조색 하나). 부서는 색이 아니라 이름표로만 구분한다. 색은 :root 토큰에서만 정한다. 이 파일에는 슬래시-별표 주석을 쓰지 않는다(앱스 스크립트가 지워서 화면이 잘린다). -->
+<style>
+  :root{color-scheme:light;--bg:#f6f2ee;--card:#ffffff;--ink:#2b221d;--soft:#5d5048;--line:#e5dcd4;--field:#fbf9f7;
+    --acc:#a8402a;--acc-ink:#ffffff;--accbg:#f8ebe6;--accink:#8a3220;--shadow:0 1px 3px rgba(60,40,30,.07);--bar:rgba(255,255,255,.97)}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;
+    --acc:#ee9a80;--acc-ink:#2a140c;--accbg:#3a2620;--accink:#ffc6b4;--shadow:none;--bar:rgba(33,27,24,.97)}}
+  :root[data-theme="dark"]{color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;
+    --acc:#ee9a80;--acc-ink:#2a140c;--accbg:#3a2620;--accink:#ffc6b4;--shadow:none;--bar:rgba(33,27,24,.97)}
+  :root{--bg2:var(--field);--mint:var(--accink);--mintbg:var(--accbg);--sky:var(--soft);--skybg:var(--field);--lemon:var(--ink);--lemonbg:var(--field);--warn:var(--accink);--warnbg:var(--accbg);--focus:var(--acc)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;font-size:18px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-wrap:anywhere}
+  .wrap{max-width:600px;margin:0 auto;padding:20px 16px calc(112px + env(safe-area-inset-bottom,0px))}
+  .hero{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin:0 0 18px}
+  .hero svg{flex:none;width:60px;height:60px}
+  h1{font-size:1.4rem;line-height:1.35;margin:0 0 2px;letter-spacing:-.02em}
+  h2{font-size:1.2rem;line-height:1.4;margin:0 0 10px;display:flex;align-items:center;gap:8px;letter-spacing:-.01em}
+  h3{font-size:1.05rem;margin:0 0 6px}
+  .sub{color:var(--soft);font-size:1rem;margin:0}
+  .pill{display:inline-block;margin-top:6px;font-size:1rem;font-weight:700;border-radius:8px;padding:2px 10px;background:var(--accbg);color:var(--accink)}
+  .dept .pill{background:var(--mintbg);color:var(--mint)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin:0 0 16px;box-shadow:var(--shadow);overflow-wrap:anywhere}
+  label.t,.t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1.08rem;margin:0 0 8px}
+  .ico{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--field);border:1px solid var(--line);font-size:1.15rem;flex:none}
+  .dept .ico{background:var(--mintbg)}
+  .ico.sky{background:var(--skybg)}.ico.lemon{background:var(--lemonbg)}.ico.mint{background:var(--mintbg)}
+  .hint{font-size:1rem;color:var(--soft);margin:-2px 0 10px}
+  input[type=date],input[type=number],input[type=text],textarea,select{width:100%;font:inherit;font-size:18px;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:var(--field);color:var(--ink);min-height:52px}
+  textarea{min-height:96px;resize:vertical}
+  textarea.s{min-height:64px}
+  input::placeholder,textarea::placeholder{color:var(--soft);opacity:1}
+  .mem{display:flex;flex-direction:column;gap:10px}
+  .row{display:flex;align-items:center;gap:12px;padding:10px 14px;min-height:52px;border:1.5px solid var(--line);border-radius:16px;background:var(--field);cursor:pointer}
+  .row.on{background:var(--accbg);border-color:var(--acc)}
+  .dept .row.on{background:var(--mintbg);border-color:var(--mint)}
+  .row input[type=checkbox]{width:26px;height:26px;accent-color:var(--acc);flex:none}
+  .dept .row input[type=checkbox]{accent-color:var(--mint)}
+  .row .nm{flex:1;font-weight:600}
+  .att{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px;background:var(--field)}
+  .att .nm{font-weight:700;min-width:0}
+  .att.is-p{border-color:var(--acc)}.att.is-a{border-color:var(--ink)}
+  .att.unset{border-color:var(--acc);border-style:dashed;background:var(--accbg)}
+  .att .reason{grid-column:1/-1;margin-top:0}
+  .seg{display:inline-grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+  .seg label{position:relative;display:block}
+  .seg input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+  .seg span{display:flex;align-items:center;justify-content:center;min-width:68px;min-height:48px;padding:0 10px;font-weight:800;font-size:17px;color:var(--soft)}
+  .seg label+label span{border-left:1.5px solid var(--line)}
+  .seg input:checked+span{background:var(--acc);color:var(--acc-ink)}
+  .seg input[value=a]:checked+span{background:var(--ink);color:var(--card)}
+  .seg input:focus-visible+span{outline:3px solid var(--focus);outline-offset:-3px}
+  .reason.need{border-color:var(--acc);background:var(--accbg)}
+  .needhint{grid-column:1/-1;margin:-2px 0 0;font-size:1rem;color:var(--accink)}
+  .reason{display:none;width:100%;margin-top:8px;font:inherit;font-size:17px;padding:10px 12px;min-height:48px;border:1.5px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink)}
+  .reason.show{display:block}
+  .wrapr{display:flex;flex-direction:column}
+  .cnt{font-size:1rem;color:var(--ink);font-weight:700;margin-top:10px}
+  .extra{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+  .xrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:12px;border:1.5px dashed var(--line);border-radius:16px}
+  .xrow .xin{display:flex;flex-direction:column;gap:8px;min-width:0}
+  .xrow input{font-size:17px}
+  .ghost{width:auto;min-height:48px;font:inherit;font-size:16px;font-weight:700;padding:10px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+  .ghost.add{margin-top:12px;color:var(--accink);border-color:var(--acc);background:var(--accbg)}
+  .ghost.del{align-self:start;color:var(--soft)}
+  .thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .thumbs img{width:76px;height:76px;object-fit:cover;border-radius:14px;border:1px solid var(--line)}
+  input[type=file]{font:inherit;font-size:16px;max-width:100%;color:var(--ink)}
+  button.send{width:100%;min-height:60px;font:inherit;font-size:1.2rem;font-weight:800;padding:16px;border:0;border-radius:18px;background:var(--acc);color:var(--acc-ink);cursor:pointer;box-shadow:var(--shadow)}
+  .dept button.send{background:var(--acc);color:var(--acc-ink)}
+  button:disabled{opacity:.6;cursor:wait}
+  .msg{margin-top:14px;padding:14px;border-radius:16px;display:none;font-weight:600}
+  .msg.ok{display:block;background:var(--mintbg);color:var(--mint)}
+  .msg.err{display:block;background:var(--warnbg);color:var(--warn)}
+  .msg .ghost{margin-top:10px;display:block}
+  .draft{display:none;background:var(--lemonbg);color:var(--lemon);border-radius:16px;padding:12px 14px;margin:0 0 16px;font-weight:600}
+  .draft.show{display:block}
+  .draft .ghost{margin-top:8px}
+  .tip{font-size:1rem;color:var(--soft);margin-top:20px;text-align:center}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .stat{border-radius:14px;padding:12px 10px;background:var(--field);border:1px solid var(--line);min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:6px;min-height:84px}
+  .dept .stat{background:var(--mintbg)}
+  
+  .stat .number{font-size:1.35rem;font-weight:800;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stat .number.no{color:var(--warn)}
+  @media (max-width:479px){.stats{grid-template-columns:minmax(0,1fr)}.stat{min-height:0;flex-direction:row-reverse;align-items:center;padding:12px 14px}.stat .number{text-align:right}}
+  .stat .number small{font-size:1rem;color:var(--soft);font-weight:700}
+  .stat .label{font-size:1rem;color:var(--soft);font-weight:600;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ok-mark{color:var(--mint)}
+  .list{list-style:none;padding:0;margin:0}
+  .list li{padding:12px 0;border-bottom:1px solid var(--line)}
+  .list li:last-child{border-bottom:0}
+  .list .why{display:block;color:var(--soft);font-size:1rem}
+  .tag{display:inline-block;font-size:1rem;font-weight:700;border-radius:999px;padding:2px 10px;background:var(--skybg);color:var(--sky);margin-left:4px;white-space:nowrap}
+  .tag.hot{background:var(--warnbg);color:var(--warn)}
+  .tag.edit{background:var(--lemonbg);color:var(--lemon)}
+  .urgent{background:var(--warnbg);border-left:5px solid var(--warn);padding:12px 14px;border-radius:14px;margin-top:10px}
+  .urgent strong{color:var(--warn)}
+  .field{padding:12px 14px;background:var(--field);border:1px solid var(--line);border-radius:16px;margin-top:10px}
+  .field h4{font-size:1rem;color:var(--soft);margin:0 0 4px;font-weight:800}
+  .dept .field h4{color:var(--mint)}
+  .field p{white-space:pre-wrap;margin:0}
+  .empty{text-align:center;padding:28px 18px}
+  .empty .big{font-size:2.2rem;display:block}
+  .empty p{margin:6px 0}
+  .loading{text-align:center;color:var(--soft);padding:36px 18px}
+  .loading .dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--acc);margin:0 4px;animation:b 1s infinite ease-in-out}
+  .dept .loading .dot{background:var(--mint)}
+  .loading .dot:nth-child(2){animation-delay:.15s}.loading .dot:nth-child(3){animation-delay:.3s}
+  @keyframes b{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
+  @media (prefers-reduced-motion:reduce){.loading .dot{animation:none}}
+  svg.chart{display:block;width:100%;height:auto;color:var(--ink)}
+  svg.chart text{fill:currentColor;font-family:inherit;font-size:13px}
+  .axis{stroke:var(--line);stroke-width:1}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:1rem;color:var(--soft);margin:6px 0 4px}
+  .legend i{display:inline-block;width:14px;height:14px;margin-right:6px;border-radius:4px;vertical-align:-2px;background:var(--acc)}
+  .legend i.s{background:var(--acc)}.legend i.t{background:var(--soft)}.legend i.none{background:none;border:2px dashed var(--soft)}
+  .photos{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+  .photos a{width:96px;font-size:1rem;color:var(--mint)}
+  .photos img{display:block;width:96px;height:72px;object-fit:cover;border-radius:12px;background:var(--bg)}
+  details.wk{background:var(--card);border:1px solid var(--line);border-radius:20px;margin:0 0 12px;box-shadow:var(--shadow)}
+  details.wk>summary{list-style:none;cursor:pointer;padding:14px 18px;min-height:64px;display:flex;align-items:center;gap:10px}
+  details.wk>summary::-webkit-details-marker{display:none}
+  details.wk>summary .when{flex:1;min-width:0}
+  details.wk>summary .when b{display:block;font-size:1.1rem}
+  details.wk>summary .when span{color:var(--soft);font-size:1rem}
+  details.wk>summary .chev{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:var(--bg2);transition:transform .2s}
+  details.wk[open]>summary .chev{transform:rotate(180deg)}
+  details.wk .body{padding:0 18px 16px}
+  details.old{margin-top:14px;border-top:1px dashed var(--line);padding-top:6px}
+  details.old>summary{cursor:pointer;min-height:48px;display:flex;align-items:center;font-weight:700;color:var(--soft)}
+  .ver{border-left:4px solid var(--line);padding:4px 0 4px 12px;margin-top:10px}
+  .ver .when{color:var(--soft);font-size:1rem;font-weight:700}
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--bar);border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(120,70,40,.08);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+  .tabbar .in{max-width:600px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .tabbar button{font:inherit;font-size:16px;font-weight:700;line-height:1.25;color:var(--soft);background:none;border:0;border-radius:16px;min-height:64px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
+  .tabbar button .e{font-size:1.4rem;line-height:1}
+  .tabbar button[aria-selected="true"]{color:var(--accink);background:var(--accbg)}
+  .dept .tabbar button[aria-selected="true"]{color:var(--mint);background:var(--mintbg)}
+  [hidden]{display:none!important}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  .dept :focus-visible{outline-color:var(--mint)}
+  .row:focus-within{outline:3px solid var(--focus);outline-offset:2px}
+  .dept .row:focus-within{outline-color:var(--mint)}
+  .foot{font-size:1rem;color:var(--soft);margin:8px 4px 0}
+  .addbox{margin-top:12px;padding:12px;border:1.5px dashed var(--acc);border-radius:16px}
+  .addbox .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .addbox .btns .ghost{margin-top:0}
+  .addmsg{margin:8px 0 0;font-size:1rem;font-weight:700;color:var(--accink)}
+</style>
+</head>
+<body>
+<div id="root"><div class="wrap" id="app"></div></div>
+<script src="../config.js"></script>
+<script src="../api.js"></script>
+<script>
+// v12: 처음 값(REP)은 api.js가 열쇠(k)로 받아 온다. 열쇠가 틀리면 REP = null 이고 아래 화면이 '링크가 올바르지 않습니다'를 보인다.
+NBAPI.start('report', 'boot', { k: NBAPI.param('k') }, function (REP) {
+if (REP) document.title = REP.name + ' 보고';
+// v12: google.script.run 과 같은 모양의 연결(api.js). 사진은 한 장씩 먼저 올리고 보고에는 사진 번호만 보낸다.
+const google = { script: { run: NBAPI.runner({
+  getMyOverview: (k, week) => NBAPI.get('report', 'overview', { k, week }),
+  getMyHistory: k => NBAPI.get('report', 'history', { k }),
+  addMember: p => NBAPI.post('report', 'addMember', p),
+  submitReport: async p => {
+    const photos = p.photos || [], ids = [];
+    for (let i = 0; i < photos.length; i++) {
+      const m = document.getElementById('msg');
+      if (m) m.textContent = '사진 ' + (i + 1) + '/' + photos.length + ' 올리는 중…';
+      const r = await NBAPI.post('report', 'photo', { k: p.k, sunday: p.sunday, i: i + 1, name: photos[i].name, type: photos[i].type, data: photos[i].data });
+      ids.push(r.id);
+    }
+    const body = Object.assign({}, p, { photoIds: ids });
+    delete body.photos;
+    return NBAPI.post('report', 'submit', body);
+  }
+}) } };
+const root = document.getElementById('root');
+const app = document.getElementById('app');
+// Owner 11/09: show '아무개 구역장' ('아무개 집사 (구역장)' -> '아무개 구역장').
+const whoRole = w => { const m = String(w || '').trim().match(/^(\S+).*\((.+)\)$/); return m ? m[1] + ' ' + m[2] : ''; };
+const esc = s => String(s == null ? '' : s).replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]));
+const ART_ZONE = '<svg viewBox="0 0 68 68" aria-hidden="true"><circle cx="34" cy="34" r="32" fill="var(--accbg)"/><path d="M16 33 34 18l18 15v17a3 3 0 0 1-3 3H19a3 3 0 0 1-3-3Z" fill="var(--card)" stroke="var(--acc)" stroke-width="3" stroke-linejoin="round"/><path d="M28 53V40h12v13" fill="var(--accbg)" stroke="var(--acc)" stroke-width="3"/><path d="M34 31c-2-3-7-2-6 2 1 3 6 5 6 5s5-2 6-5c1-4-4-5-6-2Z" fill="var(--acc)"/></svg>';
+const ART_DEPT = '<svg viewBox="0 0 68 68" aria-hidden="true"><circle cx="34" cy="34" r="32" fill="var(--mintbg)"/><path d="M34 52V32" stroke="var(--mint)" stroke-width="4" stroke-linecap="round"/><path d="M34 34c0-9-7-14-15-13 0 9 7 14 15 13Z" fill="var(--mint)"/><path d="M34 30c0-8 6-13 14-12 0 8-6 13-14 12Z" fill="var(--card)" stroke="var(--mint)" stroke-width="3"/><ellipse cx="34" cy="53" rx="13" ry="4" fill="var(--mint)" opacity=".35"/></svg>';
+const icon = (e, cls) => `<span class="ico${cls ? ' ' + cls : ''}" aria-hidden="true">${e}</span>`;
+const FIELD = {progress:'🌱 진행사항',note:'💬 특이사항',suggest:'💡 건의사항',prayer:'🙏 기도제목',newcomer:'🐣 새 친구',event:'🎈 행사·예배 내용',plan:'🗓️ 사역 계획·다음 주 일정',teacherState:'🤝 교사들의 현재 상태',next:'📌 다음 주 일정·부탁',absence:'🧡 결석 이유',teacherZoneNote:'🍎 교사구역 나눔·기도제목'};
+// v11 (형님 11/09): 210구역은 청년 보고 — 진행사항 칸이 오후 청년모임, 출석 이름은 오전예배.
+const YOUTH_MEETING = '🌙 오후 청년모임 — 한 일·나눈 말씀';
+const progressLabel = r => r && r.youth ? YOUTH_MEETING : FIELD.progress;
+const youthCount = r => r && r.youth ? `<div class="field"><h4>⛪ 청년예배 출석 인원</h4><p>${r.youthWorship == null ? '<span style="color:var(--soft)">적지 않으셨습니다</span>' : r.youthWorship + '명'}</p></div>` : '';
+
+function lastSunday() {
+  const d = new Date(); d.setDate(d.getDate() - d.getDay());
+  const p = n => String(n).padStart(2, '0');
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+// '2026-10-18' → '10월 18일 주일' (올해가 아니면 연도도)
+function weekText(w, noSuffix) {
+  const [y, m, d] = w.split('-').map(Number);
+  return `${y !== new Date().getFullYear() ? y + '년 ' : ''}${m}월 ${d}일${noSuffix ? '' : ' 주일'}`;
+}
+const pct = n => n == null ? '—' : Math.round(n) + '%';
+
+// ───────────── ① 보고하기 (v4 화면 그대로 + 쓰던 내용 임시 저장) ─────────────
+// v7 (형님 11/08): 명단이 있으면 모든 이름에 [출석][결석]을 고른다. 결석을 고르면 이유 칸이 열린다(비워도 보낼 수 있지만 표시해 둔다).
+// 명단이 없으면 v6처럼 숫자와 글로 적는다(구역은 zoneAbsentBlock).
+function attendBlock(id, title, names, hintNone) {
+  if (!names.length) {
+    return `<div class="card" id="${id}_card"><label class="t" for="${id}_n">${title}</label><p class="hint">${hintNone}</p>
+      <input type="number" id="${id}_n" min="0" inputmode="numeric" placeholder="출석 인원">
+      <textarea class="s" id="${id}_txt" aria-label="결석하신 분과 이유" placeholder="결석하신 분과 이유 (예: 홍길동 - 입원)" style="margin-top:10px"></textarea>${addMemberHtml(id)}</div>`;
+  }
+  const rows = names.map((n, i) => `<div class="att" id="${id}_r${i}"><span class="nm" id="${id}_l${i}">${esc(n)}</span>
+      <div class="seg" role="radiogroup" aria-labelledby="${id}_l${i}"><label><input type="radio" name="${id}_s${i}" id="${id}_p${i}" value="p"><span>출석</span></label><label><input type="radio" name="${id}_s${i}" id="${id}_a${i}" value="a"><span>결석</span></label></div>
+      <input class="reason" id="${id}_w${i}" aria-label="${esc(n)} 결석 이유" placeholder="결석 이유 (예: 출장, 병원)"><p class="needhint" id="${id}_h${i}" hidden>이유를 모르시면 비워 두셔도 보낼 수 있습니다.</p></div>`).join('');
+  return `<div class="card" id="${id}_card"><p class="t">${title}</p><p class="hint">한 분씩 이름을 보시고 [출석] 또는 [결석]을 눌러 주세요. 결석이면 이유를 적어 주세요.</p>
+    <div class="mem">${rows}</div><div class="cnt" id="${id}_cnt" aria-live="polite"></div>${addMemberHtml(id)}</div>`;
+}
+// v9 (형님 11/08 1안): 구역장·부장이 명단에 새 이름을 바로 넣는다. 넣은 이름은 담임목사님 열람실에 '새로 넣은 분'으로 보인다.
+function addMemberHtml(id) {
+  return `<button type="button" class="ghost add" data-addm-open="${id}">＋ 명단에 새 이름 넣기</button>
+    <div class="addbox" id="${id}_addbox" hidden><label class="t" for="${id}_addname">새로 넣을 분의 이름</label>
+      <input type="text" id="${id}_addname" maxlength="20" autocomplete="off" placeholder="이름">
+      <p class="hint" style="margin:8px 0 0">넣으시면 다음 보고부터 명단에 늘 나옵니다. 담임목사님 열람실에도 '새로 넣은 분'으로 보입니다.</p>
+      <div class="btns"><button type="button" class="ghost add" data-addm-save="${id}">명단에 넣기</button><button type="button" class="ghost" data-addm-cancel="${id}">닫기</button></div>
+      <p class="addmsg" id="${id}_addmsg" role="status" aria-live="polite"></p></div>`;
+}
+const choiceOf = (id, i) => document.getElementById(`${id}_p${i}`).checked ? 'p' : document.getElementById(`${id}_a${i}`).checked ? 'a' : '';
+function wireAttend(id, names) {
+  if (!names.length) return;
+  const count = () => {
+    const c = names.map((_, i) => choiceOf(id, i));
+    const p = c.filter(x => x === 'p').length, a = c.filter(x => x === 'a').length;
+    document.getElementById(`${id}_cnt`).textContent = `출석 ${p} · 결석 ${a} · 미선택 ${names.length - p - a} / 명단 ${names.length}명`;
+  };
+  const paint = i => {
+    const c = choiceOf(id, i), row = document.getElementById(`${id}_r${i}`), w = document.getElementById(`${id}_w${i}`);
+    row.classList.toggle('is-p', c === 'p'); row.classList.toggle('is-a', c === 'a');
+    if (c) row.classList.remove('unset');
+    w.classList.toggle('show', c === 'a');
+    const need = c === 'a' && !w.value.trim();
+    w.classList.toggle('need', need); document.getElementById(`${id}_h${i}`).hidden = !need;
+  };
+  names.forEach((_, i) => {
+    ['p', 'a'].forEach(v => document.getElementById(`${id}_${v}${i}`).addEventListener('change', () => { paint(i); count(); }));
+    document.getElementById(`${id}_w${i}`).addEventListener('input', () => paint(i));
+  });
+  count();
+}
+function readAttend(id, names) {
+  if (!names.length) {
+    const t = document.getElementById(`${id}_txt`).value.trim();
+    return { present: document.getElementById(`${id}_n`).value, total: '', absent: t ? [{ name: '(직접 기재)', reason: t }] : [], presentNames: [], unset: [] };
+  }
+  const c = names.map((_, i) => choiceOf(id, i));
+  return { present: c.filter(x => x === 'p').length, total: names.length,
+           presentNames: names.filter((_, i) => c[i] === 'p'),
+           absent: names.map((n, i) => ({ n, i })).filter(o => c[o.i] === 'a')
+                        .map(o => ({ name: o.n, reason: cleanReason(document.getElementById(`${id}_w${o.i}`).value) })),
+           unset: names.map((_, i) => i).filter(i => !c[i]) };
+}
+function zoneAbsentBlock(names) {
+  const rows = names.map((n, i) => `<div class="wrapr"><label class="row" id="za_r${i}"><input type="checkbox" id="za_c${i}"><span class="nm">${esc(n)}</span></label>
+      <input class="reason" id="za_w${i}" aria-label="${esc(n)} 결석 이유" placeholder="결석 이유 (예: 출장, 병원)"></div>`).join('');
+  return `<div class="card" id="z_card"><p class="t">${icon('🧡')}결석자</p>
+    <p class="hint">${names.length ? '이번 주에 못 오신 분을 눌러 주시고, 이유를 적어 주세요. 모두 오셨으면 그냥 두시면 됩니다.' : '구역 명단이 아직 없습니다. 못 오신 분의 이름과 이유를 적어 주세요. 모두 오셨으면 비워 두시면 됩니다.'}</p>
+    ${names.length ? `<div class="mem">${rows}</div>` : ''}
+    <div class="extra" id="za_extra"></div>
+    ${names.length ? '' : `<button type="button" class="ghost add" id="za_add">＋ 한 분 더 적기</button>`}
+    <div class="cnt" id="za_cnt" aria-live="polite"></div>${addMemberHtml('z')}</div>`;
+}
+let addExtraRow = null;
+function wireZoneAbsent(names) {
+  const extra = document.getElementById('za_extra');
+  let n = 0;
+  const count = () => { document.getElementById('za_cnt').textContent = `결석 ${readZoneAbsent(names).length}명`; };
+  addExtraRow = (nm, rs) => {
+    const i = n++;
+    const div = document.createElement('div');
+    div.className = 'xrow'; div.id = `za_x${i}`;
+    div.innerHTML = `<div class="xin"><input type="text" id="za_xn${i}" aria-label="결석하신 분 이름" placeholder="이름"><input type="text" id="za_xr${i}" aria-label="결석 이유" placeholder="이유 (예: 병원, 여행)"></div><button type="button" class="ghost del" aria-label="이 줄 지우기">지우기</button>`;
+    div.querySelector('.del').addEventListener('click', () => { div.remove(); count(); saveDraft(); const ad = document.getElementById('za_add'); if (ad) ad.focus(); });
+    div.addEventListener('input', count);
+    extra.appendChild(div);
+    if (nm) div.querySelectorAll('input')[0].value = nm;
+    if (rs) div.querySelectorAll('input')[1].value = rs;
+    count();
+    return div;
+  };
+  names.forEach((_, i) => document.getElementById(`za_c${i}`).addEventListener('change', e => {
+    document.getElementById(`za_r${i}`).classList.toggle('on', e.target.checked);
+    document.getElementById(`za_w${i}`).classList.toggle('show', e.target.checked);
+    count();
+  }));
+  const zaAdd = document.getElementById('za_add'); if (zaAdd) zaAdd.addEventListener('click', () => { addExtraRow().querySelector('input').focus(); });
+  if (!names.length) addExtraRow();
+  count();
+}
+const cleanName = s => s.replace(/:/g, '·').replace(/\s*\/\s*/g, ' ').trim();
+const cleanReason = s => s.replace(/\s+\/\s+/g, ', ').trim();
+function readZoneAbsent(names) {
+  const list = names.map((n, i) => ({ n, i })).filter(o => document.getElementById(`za_c${o.i}`).checked)
+    .map(o => ({ name: o.n, reason: cleanReason(document.getElementById(`za_w${o.i}`).value) }));
+  document.querySelectorAll('#za_extra .xrow').forEach(row => {
+    const ins = row.querySelectorAll('input');
+    const name = cleanName(ins[0].value), reason = cleanReason(ins[1].value);
+    if (!name && !reason) return;
+    list.push({ name: name || '(직접 기재)', reason });
+  });
+  return list;
+}
+function shrink(file) {
+  return new Promise((res, rej) => {
+    const fr = new FileReader();
+    fr.onload = () => { const img = new Image(); img.onload = () => {
+      const s = Math.min(1, 1600 / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      res({ name: file.name.replace(/\.\w+$/, '') + '.jpg', type: 'image/jpeg', data: c.toDataURL('image/jpeg', 0.82).split(',')[1], url: c.toDataURL('image/jpeg', 0.5) });
+    }; img.onerror = rej; img.src = fr.result; };
+    fr.onerror = rej; fr.readAsDataURL(file);
+  });
+}
+function textCard(id, emoji, title, hint, placeholder, small) {
+  return `<div class="card"><label class="t" for="${id}">${icon(emoji)}${title}</label>${hint ? `<p class="hint">${hint}</p>` : ''}<textarea${small ? ' class="s"' : ''} id="${id}"${placeholder ? ` placeholder="${placeholder}"` : ''}></textarea></div>`;
+}
+
+// 쓰던 내용 임시 저장 — 이 휴대폰 안에만, 보고 화면의 글만 저장한다. 보내기에 성공하면 지운다.
+// 한눈에·지난 보고에서 받은 내용은 어디에도 저장하지 않는다.
+const DRAFT_KEY = REP ? 'report-draft-v7:' + REP.k : '';
+let draftTimer = null, draftReady = false;
+function formEl() { return document.getElementById('p-report'); }
+function saveDraft() {
+  if (!draftReady || !REP) return;
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(writeDraft, 400);
+}
+function writeDraft() {
+  if (!draftReady || !REP) return;
+  clearTimeout(draftTimer);
+  {
+    const d = { savedAt: Date.now(), values: {}, checks: {}, extra: [] };
+    formEl().querySelectorAll('textarea[id],input[type=text][id]:not([id^=za_x]):not([id$=_addname]),input.reason[id],input[type=number][id],input[type=date][id]').forEach(el => { if (el.value) d.values[el.id] = el.value; });
+    formEl().querySelectorAll('input[type=checkbox][id],input[type=radio][id]').forEach(el => { if (el.checked) d.checks[el.id] = true; });
+    document.querySelectorAll('#za_extra .xrow').forEach(row => { const ins = row.querySelectorAll('input'); if (ins[0].value || ins[1].value) d.extra.push([ins[0].value, ins[1].value]); });
+    const empty = !Object.keys(d.values).filter(k => k !== 'sunday').length && !Object.keys(d.checks).length && !d.extra.length;
+    try { empty ? localStorage.removeItem(DRAFT_KEY) : localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); } catch (_) {}
+  }
+}
+function clearDraft() { clearTimeout(draftTimer); try { localStorage.removeItem(DRAFT_KEY); } catch (_) {} }
+function restoreDraft() {
+  let d = null;
+  try { d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch (_) { d = null; }
+  if (!d || !d.savedAt || Date.now() - d.savedAt > 8 * 864e5) { clearDraft(); return false; }
+  Object.keys(d.values || {}).forEach(id => { const el = document.getElementById(id); if (el && el.type !== 'file') el.value = d.values[id]; });
+  Object.keys(d.checks || {}).forEach(id => { const el = document.getElementById(id); if (el && !el.checked) { el.checked = true; el.dispatchEvent(new Event('change')); } });
+  if (addExtraRow && (d.extra || []).length) {
+    const blanks = Array.from(document.querySelectorAll('#za_extra .xrow')).filter(r => !r.querySelector('input').value);
+    blanks.forEach(r => r.remove());
+    d.extra.forEach(([nm, rs]) => addExtraRow(nm, rs));
+  }
+  return true;
+}
+
+// ───────────── 탭 ─────────────
+const TABS = ['report', 'overview', 'history'];
+const loaded = { overview: false, history: false };
+function pickTab(name, focus) {
+  TABS.forEach(t => {
+    const on = t === name, b = document.getElementById('tab-' + t);
+    b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1;
+    document.getElementById('p-' + t).hidden = !on;
+  });
+  if (focus) document.getElementById('tab-' + name).focus();
+  window.scrollTo(0, 0);
+  if (name === 'overview' && !loaded.overview) loadOverview('');
+  if (name === 'history' && !loaded.history) loadHistory();
+}
+const loadingHtml = t => `<div class="card loading" role="status"><span class="dot"></span><span class="dot"></span><span class="dot"></span><p>${t}</p></div>`;
+const errorHtml = (t, fn) => `<div class="card empty" role="alert"><span class="big" aria-hidden="true">🙏</span><p><b>${t}</b></p><p class="hint">인터넷 연결을 확인하시고 다시 눌러 주세요.</p><button type="button" class="ghost add" data-retry="${fn}">다시 불러오기</button></div>`;
+function emptyHtml(unitWord) {
+  return `<div class="card empty"><span class="big" aria-hidden="true">🌱</span><p><b>아직 보고가 없습니다</b></p><p class="hint">[보고하기]에서 첫 보고를 보내 주시면<br>여기에서 ${unitWord}의 한 주를 모아 보실 수 있습니다.</p><button type="button" class="ghost add" data-go="report">보고하러 가기</button></div>`;
+}
+
+// ───────────── ② 우리 구역 한눈에 ─────────────
+let overviewReq = 0;
+function loadOverview(week) {
+  const box = document.getElementById('p-overview-body'), id = ++overviewReq;
+  box.innerHTML = loadingHtml('우리 ' + UNIT_WORD + ' 소식을 불러오는 중입니다…');
+  google.script.run
+    .withSuccessHandler(d => { if (id !== overviewReq) return; loaded.overview = true; renderOverview(d); })
+    .withFailureHandler(e => { if (id !== overviewReq) return; box.innerHTML = errorHtml((e && e.message) || '불러오지 못했습니다.', 'overview'); })
+    .getMyOverview(REP.k, week || '');
+}
+// 구역: 12주 결석 기록 막대. 보고 없는 주는 점선 표시(0으로 바꾸지 않는다).
+function zoneChart(trend) {
+  const W = 340, H = 200, L = 30, R = 8, T = 16, B = 34, pw = W - L - R, ph = H - T - B;
+  const max = Math.max(3, ...trend.map(p => p.absentCount || 0));
+  const step = max <= 4 ? 1 : Math.ceil(max / 4);
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="최근 12주 결석 기록 수 막대그래프">`;
+  for (let v = 0; v <= max; v += step) { const y = T + ph * (1 - v / max); s += `<line class="axis" x1="${L}" x2="${W - R}" y1="${y}" y2="${y}"/><text x="${L - 6}" y="${y + 4}" text-anchor="end">${v}</text>`; }
+  const bw = pw / 12;
+  trend.forEach((p, i) => {
+    const x = L + bw * i + bw * 0.18, w = bw * 0.64;
+    if (!p.reported) s += `<rect x="${x}" y="${T + ph - 18}" width="${w}" height="18" rx="5" fill="none" stroke="var(--soft)" stroke-width="1.5" stroke-dasharray="3 3"><title>${esc(weekText(p.week))} 보고 없음</title></rect>`;
+    else {
+      const h = ph * p.absentCount / max;
+      s += `<rect x="${x}" y="${T + ph - h}" width="${w}" height="${Math.max(h, 0)}" rx="5" fill="var(--acc)"><title>${esc(weekText(p.week))} 결석 ${p.absentCount}명</title></rect>`;
+      if (p.absentCount === 0) s += `<rect x="${x}" y="${T + ph - 3}" width="${w}" height="3" rx="1.5" fill="var(--acc)" opacity=".5"/>`;
+    }
+    if (i % 3 === 2 || i === 0) s += `<text x="${x + w / 2}" y="${H - 12}" text-anchor="middle">${esc(p.week.slice(5).replace('-', '/').replace(/^0/, ''))}</text>`;
+  });
+  return s + '</svg>';
+}
+// 부서: 12주 출석률 선(학생·교사). 보고 없거나 계산할 수 없는 주는 선을 잇지 않는다.
+function deptChart(trend) {
+  const W = 340, H = 210, L = 40, R = 10, T = 14, B = 34, pw = W - L - R, ph = H - T - B;
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="최근 12주 학생·교사 출석률 꺾은선그래프">`;
+  [0, 50, 100].forEach(t => { const y = T + ph * (1 - t / 100); s += `<line class="axis" x1="${L}" x2="${W - R}" y1="${y}" y2="${y}"/><text x="${L - 6}" y="${y + 4}" text-anchor="end">${t}%</text>`; });
+  trend.forEach((p, i) => { if (i % 3 === 2 || i === 0) s += `<text x="${L + pw * i / 11}" y="${H - 12}" text-anchor="${i === 0 ? 'start' : i === 11 ? 'end' : 'middle'}">${esc(p.week.slice(5).replace('-', '/').replace(/^0/, ''))}</text>`; });
+  [['studentRate', 'var(--mint)', '학생'], ['teacherRate', 'var(--sky)', '교사']].forEach(([k, color, label]) => {
+    let seg = [];
+    const flush = () => { if (seg.length > 1) s += `<polyline fill="none" stroke="${color}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" points="${seg.join(' ')}"/>`; seg = []; };
+    trend.forEach((p, i) => {
+      const r = p[k]; if (r == null) { flush(); return; }
+      const x = L + pw * i / 11, y = T + ph * (1 - Math.min(r, 100) / 100); seg.push(`${x},${y}`);
+      s += `<circle cx="${x}" cy="${y}" r="4.5" fill="var(--card)" stroke="${color}" stroke-width="3"><title>${esc(weekText(p.week))} ${label} ${pct(r)}</title></circle>`;
+    });
+    flush();
+  });
+  return s + '</svg>';
+}
+function absentListHtml(list, emptyText) {
+  return list && list.length ? `<ul class="list">${list.map(a => `<li><b>${esc(a.name)}</b><span class="why">${esc(a.reason || '이유를 적지 않으셨습니다')}</span></li>`).join('')}</ul>` : `<p class="hint" style="margin:0">${emptyText}</p>`;
+}
+function fieldHtml(label, text) { return `<div class="field"><h4>${label}</h4><p>${text ? esc(text) : '<span style="color:var(--soft)">적지 않으셨습니다</span>'}</p></div>`; }
+function photosHtml(photos) {
+  return photos && photos.length ? `<div class="photos">${photos.map((p, i) => `<a href="${esc(p.url)}" target="_blank" rel="noreferrer"><img src="${esc(p.thumbnail)}" alt="보고 사진 ${i + 1}" loading="lazy" referrerpolicy="no-referrer">사진 ${i + 1} 크게 보기</a>`).join('')}</div>` : '';
+}
+function sharedHtml(list) {
+  if (!list || !list.length) return '';
+  const val = (k, v) => {
+    if (k === 'reported') return v ? '보고했습니다' : '아직 보고 전입니다';
+    if (k === 'absentCount') return `결석 ${v}명`;
+    if (k === 'attendance' || k === 'teachers') return `${v.present == null ? '—' : v.present} / ${v.total == null ? '—' : v.total}명 · ${pct(v.rate)}`;
+    if (k === 'absent' || k === 'teacherAbsent') return v.length ? v.map(a => a.name + ' · ' + (a.reason || '이유 미기재')).join('\n') : '없음';
+    if (k === 'photos') return v.length + '장';
+    return v || '적지 않음';
+  };
+  const NAME = Object.assign({}, FIELD, { reported: '📮 이번 주 보고', absentCount: '🧡 결석', attendance: '🧒 학생 출석', teachers: '🍎 교사 출석', absent: '🧡 결석자', teacherAbsent: '🧡 교사 결석자', photos: '📷 사진' });
+  const ORDER = ['reported', 'absentCount', 'attendance', 'teachers', 'newcomer', 'next', 'plan', 'event', 'progress', 'suggest', 'note', 'absent', 'teacherAbsent', 'prayer', 'teacherState', 'photos'];
+  return `<section class="card" id="ov-shared"><h2>${icon('🤝', 'sky')}함께 보는 이웃 구역·부서</h2><p class="hint">목사님이 함께 보도록 열어 두신 내용만 보입니다.</p>
+    ${list.map(u => `<div class="field"><h4>${esc(u.name)}</h4><p>${ORDER.filter(k => k in u.fields).map(k => `${NAME[k] || k}: ${esc(val(k, u.fields[k]))}`).join('\n')}</p></div>`).join('')}</section>`;
+}
+function renderOverview(d) {
+  const box = document.getElementById('p-overview-body');
+  const isDept = d.unit.kind === '부서', r = d.report;
+  if (!d.availableWeeks.length || !r) { box.innerHTML = emptyHtml(UNIT_WORD) + sharedHtml(d.shared); return; }
+  const absentNow = r.absent.length + (r.teacherAbsent || []).length;
+  const stat = (n, l, cls) => `<div class="stat"><div class="number${cls ? ' ' + cls : ''}">${n}</div><div class="label">${l}</div></div>`;
+  // Owner 11/07: tile 1 always answers "did THIS Sunday's report go in?"; labels stay one line, 3 tiles in fixed positions.
+  const sentThisWeek = d.availableWeeks.includes(lastSunday());
+  const pick = `<div class="card"><label class="t" for="ov-week">${icon('📅')}어느 주일을 볼까요?</label>
+    <select id="ov-week">${d.availableWeeks.map(w => `<option value="${w}"${w === d.selectedWeek ? ' selected' : ''}>${esc(weekText(w))}</option>`).join('')}</select></div>`;
+  const stats = `<section class="card" id="ov-stats"><h2>${icon('🌼', 'lemon')}${esc(weekText(d.selectedWeek))} 한눈에</h2><div class="stats">
+    ${sentThisWeek ? stat('<span class="ok-mark">✔</span> 보냄', '이번 주 보고') : stat('✖ 안 보냄', '이번 주 보고', 'no')}
+    ${isDept ? stat(r.attendance.present == null ? '—' : `${r.attendance.present}<small> / ${r.attendance.total == null ? '—' : r.attendance.total}명</small>`, '아이들 출석') : stat(`${absentNow}<small>명</small>`, '결석')}
+    ${stat(`${d.watch.length}<small>명</small>`, '2주 연속 결석')}</div></section>`;
+  const urgent = d.urgent.length ? `<section class="card" id="ov-urgent"><h2>${icon('🔔')}먼저 살펴볼 소식</h2><p class="hint">입원·수술·장례 같은 낱말이 들어간 기록입니다.</p>${d.urgent.map(u => `<div class="urgent"><strong>${FIELD[u.field] || '소식'}</strong><p style="margin:4px 0 0;white-space:pre-wrap">${esc(u.text)}</p></div>`).join('')}</section>` : '';
+  const chart = isDept
+    ? `<section class="card" id="ov-chart"><h2>${icon('📈', 'mint')}최근 12주 출석률</h2><div class="legend"><span><i class="s"></i>아이들</span><span><i class="t"></i>선생님</span></div>${deptChart(d.trend)}<p class="hint" style="margin:6px 0 0">보고가 없거나 숫자가 비어 있는 주는 선을 잇지 않습니다.</p></section>`
+    : `<section class="card" id="ov-chart"><h2>${icon('📊')}최근 12주 결석 기록</h2><div class="legend"><span><i></i>결석한 분 수</span><span><i class="none"></i>보고 없는 주</span></div>${zoneChart(d.trend)}<p class="hint" style="margin:6px 0 0">구역에서 적어 보내신 결석 인원입니다.</p></section>`;
+  const absent = `<section class="card" id="ov-absent"><h2>${icon('🧡')}결석하신 분과 이유</h2>
+    ${isDept ? `<h3>아이들</h3>${absentListHtml(r.absent, '모두 나왔습니다.')}${r.noTeacher ? '' : `<h3 style="margin-top:12px">선생님</h3>${absentListHtml(r.teacherAbsent, '모두 나오셨습니다.')}`}` : `${r.attendance ? `<p style="margin:0 0 6px;font-weight:700">출석 ${r.attendance.present == null ? '—' : r.attendance.present}명 · 결석 ${r.absent.length}명</p>` : ''}${absentListHtml(r.absent, '이번 주에는 모두 오셨습니다. 감사합니다!')}`}</section>`;
+  const watch = `<section class="card" id="ov-watch"><h2>${icon('👀', 'sky')}2주 연속 결석, 함께 살펴보기</h2><p class="hint">2주 이상 연속으로 결석하신 분입니다. 12주 이상 이어지면 '장결자'로 표시합니다. 보고가 빠진 주가 있으면 이어서 세지 않습니다.</p>
+    ${d.watch.length ? `<ul class="list">${d.watch.map(w => `<li><b>${esc(w.name)}</b> <span class="tag${w.weeks >= 3 ? ' hot' : ''}">${w.weeks}주째</span>${w.longTerm ? ' <span class="tag hot">장결자</span>' : ''}${isDept ? ` <span class="tag">${esc(w.role)}</span>` : ''}<span class="why">이번 주 이유: ${esc(w.reason || '적지 않음')}</span></li>`).join('')}</ul>` : '<p class="hint" style="margin:0">이어서 결석하신 분이 없습니다.</p>'}
+    ${d.absentTally.length ? `<h3 style="margin-top:14px">최근 12주 결석 횟수</h3><ul class="list">${d.absentTally.slice(0, 8).map(t => `<li><b>${esc(t.name)}</b>${isDept ? ` <span class="tag">${esc(t.role)}</span>` : ''} <span class="why">${t.count}번</span></li>`).join('')}</ul>` : ''}</section>`;
+  const story = isDept
+    ? `<section class="card" id="ov-prayer"><h2>${icon('🙏', 'mint')}기도제목</h2><p style="white-space:pre-wrap;margin:0">${r.prayer ? esc(r.prayer) : '<span class="hint">적지 않으셨습니다</span>'}</p></section>
+       <section class="card" id="ov-new"><h2>${icon('🐣', 'lemon')}새 친구</h2><p style="white-space:pre-wrap;margin:0">${r.newcomer ? esc(r.newcomer) : '<span class="hint">이번 주에는 없습니다</span>'}</p></section>
+       <section class="card" id="ov-next"><h2>${icon('📌', 'sky')}다가오는 일정</h2>${fieldHtml(FIELD.plan, r.plan)}${r.next ? fieldHtml(FIELD.next, r.next) : ''}</section>
+       <section class="card" id="ov-story"><h2>${icon('📖')}이번 주 보고 내용</h2>${fieldHtml(FIELD.event, r.event)}${photosHtml(r.photos)}${fieldHtml(FIELD.teacherState, r.teacherState)}${r.teacherZone ? fieldHtml(FIELD.teacherZoneNote, r.teacherZoneNote) : ''}${fieldHtml('💬 특이사항·건의사항', r.note)}${r.suggest ? fieldHtml(FIELD.suggest, r.suggest) : ''}</section>`
+    : `<section class="card" id="ov-story"><h2>${icon('📖')}이번 주 보고 내용</h2>${youthCount(r)}${fieldHtml(progressLabel(r), r.progress)}${fieldHtml(FIELD.note, r.note)}${fieldHtml(FIELD.suggest, r.suggest)}</section>`;
+  box.innerHTML = pick + stats + urgent + chart + absent + watch + story + sharedHtml(d.shared) +
+    `<p class="foot">🔒 이 화면의 결석 이유와 ${isDept ? '기도제목' : '특이사항'}은 본인만 보시는 내용입니다. 캡처해서 다른 분께 보내지 말아 주세요.</p>`;
+  document.getElementById('ov-week').addEventListener('change', e => loadOverview(e.target.value));
+}
+
+// ───────────── ③ 지난 보고 ─────────────
+function loadHistory() {
+  const box = document.getElementById('p-history-body');
+  box.innerHTML = loadingHtml('지난 보고를 불러오는 중입니다…');
+  google.script.run
+    .withSuccessHandler(d => { loaded.history = true; renderHistory(d); })
+    .withFailureHandler(e => { box.innerHTML = errorHtml((e && e.message) || '불러오지 못했습니다.', 'history'); })
+    .getMyHistory(REP.k);
+}
+function reportBody(r) {
+  if (r.kind === '부서') {
+    const a = r.attendance, t = r.teachers;
+    return `<div class="field"><h4>🧒 아이들 출석</h4><p>${a.present == null ? '—' : a.present} / ${a.total == null ? '—' : a.total}명 · ${pct(a.rate)}</p></div>
+      ${r.noTeacher ? '' : `<div class="field"><h4>🍎 선생님 출석</h4><p>${t.present == null ? '—' : t.present} / ${t.total == null ? '—' : t.total}명 · ${pct(t.rate)}</p></div>`}
+      <div class="field"><h4>🧡 결석 (아이들)</h4>${absentListHtml(r.absent, '없음')}</div>
+      ${r.noTeacher ? '' : `<div class="field"><h4>🧡 결석 (선생님)</h4>${absentListHtml(r.teacherAbsent, '없음')}</div>`}
+      ${['event', 'plan', 'teacherState', 'teacherZoneNote', 'prayer', 'note', 'newcomer', 'suggest', 'next'].filter(k => k === 'teacherZoneNote' ? r.teacherZone : !(k === 'suggest' || k === 'next') || r[k]).map(k => fieldHtml(k === 'note' ? '💬 특이사항·건의사항' : FIELD[k], r[k])).join('')}${photosHtml(r.photos)}`;
+  }
+  return `${r.attendance ? `<div class="field"><h4>👥 출석</h4><p>출석 ${r.attendance.present == null ? '—' : r.attendance.present}명 · 결석 ${r.absent.length}명${r.attendance.total == null ? '' : ` (명단 ${r.attendance.total}명)`}</p></div>` : ''}<div class="field"><h4>🧡 결석자</h4>${absentListHtml(r.absent, '모두 오셨습니다')}</div>${youthCount(r)}${fieldHtml(progressLabel(r), r.progress)}${fieldHtml(FIELD.note, r.note)}${fieldHtml(FIELD.suggest, r.suggest)}`;
+}
+function renderHistory(d) {
+  const box = document.getElementById('p-history-body');
+  if (!d.weeks.length) { box.innerHTML = emptyHtml(UNIT_WORD); return; }
+  box.innerHTML = `<p class="hint" style="margin:0 4px 12px">주일을 누르면 그 주에 보내신 내용이 펼쳐집니다. 고쳐서 다시 보내신 주는 <span class="tag edit">수정됨</span> 표시가 있고, 처음 보낸 내용도 볼 수 있습니다.</p>` +
+    d.weeks.map((w, i) => {
+      const r = w.latest, n = r.absent.length + (r.teacherAbsent || []).length;
+      return `<details class="wk"${i === 0 ? ' open' : ''}><summary><span class="when"><b>${esc(weekText(w.week))}</b><span>결석 ${n}명${w.edited ? ` · <span class="tag edit">수정됨</span>` : ''}</span></span><span class="chev" aria-hidden="true">▾</span></summary>
+        <div class="body"><p class="hint" style="margin:0">${w.edited ? '마지막으로 보낸 내용' : '보낸 시각'} · ${esc(r.submittedAt || '시각 기록 없음')}</p>${reportBody(r)}
+        ${w.earlier.length ? `<details class="old"><summary>이전에 보낸 내용 ${w.earlier.length}개 보기</summary>${w.earlier.map(v => `<div class="ver"><p class="when">${esc(v.submittedAt || '시각 기록 없음')}에 보낸 내용</p>${reportBody(v)}</div>`).join('')}</details>` : ''}</div></details>`;
+    }).join('');
+}
+
+// ───────────── 시작 ─────────────
+let UNIT_WORD = '구역';
+if (!REP) {
+  app.innerHTML = `<div class="hero">${ART_ZONE}<div><h1>북부산성결교회 보고</h1></div></div><div class="card">링크가 올바르지 않습니다.<br>담임목사님께 받은 개인 링크로 다시 열어 주세요.</div>`;
+} else {
+  const isDept = String(REP.kind).trim() === '부서';
+  UNIT_WORD = isDept ? '부서' : '구역';
+  const members = (REP.roster && REP.roster.members) || [];
+  const teachers = (REP.roster && REP.roster.teachers) || [];
+  const noTeacher = isDept && !!REP.noTeacher;   // v9 (형님 11/08): 청년부는 교사가 따로 없다
+  const youth = !isDept && !!REP.youth;   // v11 (형님 11/09): 210구역 = 청년 보고
+  const ZONE_TITLE = icon('👥') + (youth ? '오전예배 출석' : '구역원 출석');
+  let photos = [];
+  root.className = isDept ? 'dept' : 'zone';
+  app.className = 'wrap ' + (isDept ? 'dept' : 'zone');
+  const head = `<div class="hero">${isDept ? ART_DEPT : ART_ZONE}<div><h1>${esc(REP.name)}</h1>
+      <p class="sub">${whoRole(REP.who) ? esc(whoRole(REP.who)) + ' · ' : ''}담임목사님께 드리는 주간 보고</p></div></div>`;
+  const zoneBody = `
+    ${members.length ? attendBlock('z', ZONE_TITLE, members, '') : zoneAbsentBlock([])}
+    ${youth ? `<div class="card"><label class="t" for="youthWorship">${icon('⛪')}청년예배 출석 인원</label><p class="hint">청년예배에 나온 인원을 숫자로만 적어 주세요.</p><input type="number" id="youthWorship" min="0" inputmode="numeric" placeholder="예: 12"></div>` : ''}
+    ${youth
+      ? textCard('progress', '🌙', '오후 청년모임 — 한 일·나눈 말씀', '오후 청년모임에서 한 일, 나눈 말씀, 함께한 일을 적어 주세요.', '예: 로마서 8장을 함께 읽고 한 주 감사 제목을 나눴습니다.', false)
+      : textCard('progress', '🌱', '진행사항', '이번 주 구역 모임에서 한 일, 나눈 말씀, 함께한 일을 적어 주세요.', '예: 주일 말씀을 함께 나누고 감사 제목을 나눴습니다.', false)}
+    ${textCard('note', '💬', '특이사항', '성도 사이 관계, 가정의 문제, 어려운 일, 기쁜 일 등 무엇이든', '', false)}
+    ${textCard('suggest', '💡', '건의사항', '교회와 목사님께 드리고 싶은 말씀', '', true)}`;
+  const deptBody = `
+    ${attendBlock('m', icon('🧒') + (noTeacher ? '청년 출석' : '아이들 출석'), members, '명단이 아직 없습니다. 숫자로 적어 주세요.')}
+    ${noTeacher ? '' : attendBlock('t', icon('🍎') + '교사 출석 (부서 교사구역)', teachers, '교사 명단이 아직 없습니다. 숫자로 적어 주세요.')}
+    <div class="card"><label class="t" for="event">${icon('🎈')}오늘 행사·예배 내용</label><textarea id="event"></textarea>
+       <label class="t" for="ph" style="margin-top:14px">${icon('📷')}사진</label><p class="hint">10장까지 올릴 수 있습니다. 휴대폰에서 알맞게 줄여서 보냅니다.</p><input type="file" id="ph" accept="image/${'*'}" multiple><div class="thumbs" id="thumbs"></div></div>
+    ${textCard('plan', '🗓️', '사역 계획·다음 주 일정', '', '다가오는 행사, 공과, 준비할 것, 다음 주 일정·부탁', true)}
+    ${noTeacher ? '' : textCard('teacherState', '🤝', '교사들의 현재 상태', '', '힘들어하는 선생님, 기쁜 일, 기도가 필요한 일', true)}
+    ${REP.teacherZone ? textCard('teacherZoneNote', '🍎', '교사구역 나눔·기도제목', esc(REP.teacherZone) + ' 보고는 따로 보내지 않으셔도 됩니다. 선생님들과 나눈 이야기와 기도제목을 여기에 적어 주세요. 교사 출석은 위 교사 출석으로 함께 갑니다.', '선생님들과 나눈 말씀, 서로의 형편, 함께 기도할 제목', false) : ''}
+    ${textCard('prayer', '🙏', '기도제목', '', '함께 기도할 제목', false)}
+    ${textCard('note', '💬', '특이사항·건의사항', '아이들·가정의 일, 관계, 어려운 일, 기쁜 일, 교회와 목사님께 드리고 싶은 말씀 등 무엇이든', '', false)}
+    ${textCard('newcomer', '🐣', '새 친구', '', '', true)}`;
+  app.innerHTML = head + `
+    <section id="p-report" role="tabpanel" aria-labelledby="tab-report">
+      <div class="draft" id="draft" role="status"><span>📝 쓰시던 내용을 다시 불러왔습니다.</span><br><button type="button" class="ghost" id="draft-clear">지우고 새로 쓰기</button></div>
+      <div class="card"><label class="t" for="sunday">${icon('📅')}보고하는 주일</label><input type="date" id="sunday" value="${lastSunday()}"></div>
+      ${isDept ? deptBody : zoneBody}
+      <button class="send" id="send">보고 보내기</button>
+      <div class="msg" id="msg" role="status" aria-live="polite"></div>
+      <p class="tip">휴대폰 화면의 메뉴에서 <b>'홈 화면에 추가'</b>를 누르시면 앱처럼 아이콘으로 저장됩니다.</p>
+    </section>
+    <section id="p-overview" role="tabpanel" aria-labelledby="tab-overview" hidden><div id="p-overview-body"></div></section>
+    <section id="p-history" role="tabpanel" aria-labelledby="tab-history" hidden><div id="p-history-body"></div></section>
+    <nav class="tabbar" aria-label="화면 고르기"><div class="in" role="tablist">
+      <button type="button" role="tab" id="tab-report" aria-controls="p-report" aria-selected="true"><span class="e" aria-hidden="true">✏️</span>보고하기</button>
+      <button type="button" role="tab" id="tab-overview" aria-controls="p-overview" aria-selected="false" tabindex="-1"><span class="e" aria-hidden="true">🏡</span><span>우리 ${UNIT_WORD}<br>한눈에</span></button>
+      <button type="button" role="tab" id="tab-history" aria-controls="p-history" aria-selected="false" tabindex="-1"><span class="e" aria-hidden="true">📚</span>지난 보고</button>
+    </div></nav>`;
+
+  if (isDept) {
+    wireAttend('m', members);
+    if (!noTeacher) wireAttend('t', teachers);
+    document.getElementById('ph').addEventListener('change', async e => {
+      const files = [...e.target.files].slice(0, 10);
+      photos = [];
+      for (const f of files) { try { photos.push(await shrink(f)); } catch (_) {} }
+      document.getElementById('thumbs').innerHTML = photos.map((p, i) => `<img src="${p.url}" alt="올릴 사진 ${i + 1}">`).join('');
+    });
+  } else {
+    if (members.length) wireAttend('z', members); else wireZoneAbsent([]);
+  }
+  // v9: 명단에 새 이름 넣기 — 넣고 나면 그 출석 칸만 다시 그리고, 이미 고른 출석·결석과 적은 글은 그대로 둔다.
+  const TITLE = { z: ZONE_TITLE, m: icon('🧒') + (noTeacher ? '청년 출석' : '아이들 출석'), t: icon('🍎') + '교사 출석 (부서 교사구역)' };
+  const HINT_NONE = { m: '명단이 아직 없습니다. 숫자로 적어 주세요.', t: '교사 명단이 아직 없습니다. 숫자로 적어 주세요.' };
+  const NAMES = { z: members, m: members, t: teachers };
+  app.addEventListener('click', e => {
+    const open = e.target.closest('[data-addm-open]'), save = e.target.closest('[data-addm-save]'), cancel = e.target.closest('[data-addm-cancel]');
+    if (open) { const id = open.dataset.addmOpen; document.getElementById(id + '_addbox').hidden = false; open.hidden = true; document.getElementById(id + '_addname').focus(); }
+    if (cancel) { const id = cancel.dataset.addmCancel; document.getElementById(id + '_addbox').hidden = true; document.querySelector(`[data-addm-open="${id}"]`).hidden = false; }
+    if (save) {
+      const id = save.dataset.addmSave, input = document.getElementById(id + '_addname'), note = document.getElementById(id + '_addmsg');
+      const name = input.value.replace(/[:\/]/g, ' ').replace(/\s+/g, ' ').trim();
+      if (!name) { note.textContent = '이름을 적어 주세요.'; input.focus(); return; }
+      if (NAMES[id].includes(name)) { note.textContent = `「${name}」 님은 이미 명단에 있습니다.`; return; }
+      save.disabled = true; note.textContent = '명단에 넣는 중…';
+      google.script.run
+        .withSuccessHandler(r => {
+          writeDraft();
+          NAMES[id].push(name);
+          document.getElementById(id + '_card').outerHTML = attendBlock(id, TITLE[id], NAMES[id], HINT_NONE[id] || '');
+          wireAttend(id, NAMES[id]);
+          restoreDraft();
+          document.querySelector(`[data-addm-open="${id}"]`).insertAdjacentHTML('beforebegin', `<p class="addmsg" role="status">✔ ${esc(r)} 위 명단 맨 아래에서 출석·결석을 골라 주세요.</p>`);
+          const n = NAMES[id].length - 1, last = document.getElementById(`${id}_r${n}`);
+          if (last) { last.scrollIntoView({ block: 'center' }); document.getElementById(`${id}_p${n}`).focus({ preventScroll: true }); }
+        })
+        .withFailureHandler(err => { save.disabled = false; note.textContent = (err && err.message) || '넣지 못했습니다. 잠시 후 다시 눌러 주세요.'; })
+        .addMember({ k: REP.k, name, role: id === 't' ? '교사' : '' });
+    }
+  });
+  if (restoreDraft()) document.getElementById('draft').classList.add('show');
+  draftReady = true;
+  formEl().addEventListener('input', saveDraft);
+  formEl().addEventListener('change', saveDraft);
+  document.getElementById('draft-clear').addEventListener('click', () => { clearDraft(); location.reload(); });
+
+  TABS.forEach((t, i) => {
+    const b = document.getElementById('tab-' + t);
+    b.addEventListener('click', () => pickTab(t));
+    b.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); pickTab(TABS[(i + (e.key === 'ArrowRight' ? 1 : 2)) % 3], true); } });
+  });
+  document.addEventListener('click', e => {
+    const go = e.target.closest('[data-go]'), retry = e.target.closest('[data-retry]');
+    if (go) pickTab(go.dataset.go);
+    if (retry) retry.dataset.retry === 'overview' ? loadOverview('') : loadHistory();
+  });
+
+  const val = id => { const el = document.getElementById(id); return el ? el.value : ''; };
+  document.getElementById('send').addEventListener('click', () => {
+    const btn = document.getElementById('send'), msg = document.getElementById('msg');
+    // v7: 명단의 이름은 모두 출석/결석을 골라야 보낼 수 있다. 고르지 않은 분을 알려 드리고 첫 분에게로 옮겨 간다.
+    const blocks = isDept ? (noTeacher ? [['m', members]] : [['m', members], ['t', teachers]]) : (members.length ? [['z', members]] : []);
+    const unset = [];
+    blocks.forEach(([id, names]) => { if (names.length) readAttend(id, names).unset.forEach(i => unset.push({ id, i, name: names[i] })); });
+    if (unset.length) {
+      unset.forEach(u => document.getElementById(`${u.id}_r${u.i}`).classList.add('unset'));
+      msg.className = 'msg err';
+      msg.textContent = `아직 출석·결석을 고르지 않은 분이 ${unset.length}명 있습니다: ${unset.slice(0, 8).map(u => u.name).join(', ')}${unset.length > 8 ? ' 외' : ''}. 한 분씩 골라 주세요.`;
+      const first = document.getElementById(`${unset[0].id}_r${unset[0].i}`);
+      first.scrollIntoView({ block: 'center' });
+      document.getElementById(`${unset[0].id}_p${unset[0].i}`).focus({ preventScroll: true });
+      return;
+    }
+    let p;
+    if (isDept) {
+      const m = readAttend('m', members), t = noTeacher ? { present: '', total: '', absent: [] } : readAttend('t', teachers);
+      p = { k: REP.k, sunday: val('sunday'), present: m.present, total: m.total, absent: m.absent,
+        tPresent: t.present, tTotal: t.total, tAbsent: t.absent,
+        prayer: val('prayer'), note: val('note'), newcomer: val('newcomer'), next: val('next'),
+        event: val('event'), plan: val('plan'), teacherState: val('teacherState'), suggest: val('suggest'), teacherZoneNote: val('teacherZoneNote'),
+        photos: photos.map(x => ({ name: x.name, type: x.type, data: x.data })) };
+    } else {
+      const z = members.length ? readAttend('z', members) : { absent: readZoneAbsent([]), present: '', total: '', presentNames: [] };
+      p = { k: REP.k, sunday: val('sunday'), absent: z.absent, present: z.present, total: z.total, presentNames: z.presentNames, progress: val('progress'), note: val('note'), suggest: val('suggest'), youthWorship: val('youthWorship') };
+    }
+    btn.disabled = true; btn.textContent = isDept && photos.length ? '사진과 함께 보내는 중…' : '보내는 중…'; msg.className = 'msg';
+    google.script.run
+      .withSuccessHandler(r => {
+        clearDraft(); document.getElementById('draft').classList.remove('show');
+        loaded.overview = false; loaded.history = false;   // 다음에 열 때 새로 불러온다
+        msg.className = 'msg ok'; msg.innerHTML = '🎉 ' + esc(r) + '<button type="button" class="ghost" data-go="history">📚 지난 보고에서 확인하기</button>';
+        btn.textContent = '다시 보내기(수정)'; btn.disabled = false;
+      })
+      .withFailureHandler(e => { msg.className = 'msg err'; msg.textContent = (e && e.message) || '보내지 못했습니다. 잠시 후 다시 눌러 주세요.'; btn.textContent = '보고 보내기'; btn.disabled = false; })
+      .submitReport(p);
+  });
+}
+});
+</script>
+</body>
+</html>

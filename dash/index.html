@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko"><head><base target="_top"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow"><title>북부산성결교회 주간 목양 보고</title>
+<!-- v11 (형님 11/09): 교사구역 207~209는 짝 교육부서 보고로, 청년부는 210구역 보고로 채운 자리 — 미제출로 세지 않고 '○○ 보고에서'로 표시. 210구역 카드에 청년예배 인원·오후 청년모임. -->
+<!-- v7 (형님 11/08 오후): 보고 화면(구역·부서)과 같은 색 톤 — 따뜻한 무채색 바탕·흰 카드·강조색 하나. 구역 카드에 출석·결석 인원. 카드마다 구역/교육부서 이름표. 이 파일에는 슬래시-별표 주석을 쓰지 않는다. -->
+<style>
+:root{color-scheme:light;--bg:#f6f2ee;--card:#fff;--ink:#2b221d;--soft:#5d5048;--line:#e5dcd4;--field:#fbf9f7;--acc:#a8402a;--accbg:#f8ebe6;--accink:#8a3220;--bar2:#8b8078;--shadow:0 1px 3px rgba(60,40,30,.07)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;--acc:#ee9a80;--accbg:#3a2620;--accink:#ffc6b4;--bar2:#8f847b;--shadow:none}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;--acc:#ee9a80;--accbg:#3a2620;--accink:#ffc6b4;--bar2:#8f847b;--shadow:none}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;-webkit-text-size-adjust:100%;overflow-wrap:anywhere;word-break:keep-all}
+.wrap{max-width:1120px;margin:auto;padding:24px 16px 56px}
+h1{font-size:clamp(1.55rem,5vw,2.1rem);letter-spacing:-.03em;line-height:1.3;margin:2px 0 0}h2{font-size:1.25rem;letter-spacing:-.02em;line-height:1.4;margin:0 0 12px;padding-left:12px;border-left:4px solid var(--acc)}h3{font-size:1.1rem;margin:0}h4{font-size:1rem;margin:0 0 4px;color:var(--soft);font-weight:700}p{margin:6px 0}
+.soft,.hint{color:var(--soft);font-size:1rem}.eyebrow{font-size:1rem;color:var(--soft);font-weight:700;margin:0}
+.top{display:flex;justify-content:space-between;align-items:end;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.now{display:inline-block;vertical-align:middle;margin-left:8px;font-size:1rem;font-weight:700;color:var(--accink);background:var(--accbg);border-radius:8px;padding:2px 10px;letter-spacing:0}
+.weeknav{display:flex;gap:8px;align-items:center}.weeknav button,.weeknav input{min-height:44px;font:inherit;font-size:1rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px}.weeknav button{font-weight:700;cursor:pointer}.weeknav button:disabled{color:var(--soft);background:var(--field);border-style:dashed;cursor:default}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px;min-width:0;overflow-wrap:anywhere}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.tile{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;min-height:44px;box-shadow:var(--shadow)}.tile.key{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
+.tile .num{font-size:2.2rem;font-weight:800;line-height:1.15;letter-spacing:-.02em}.tile .num small{font-size:1.05rem;font-weight:700;color:var(--soft);margin-left:3px}.tile .lab{font-size:1rem;font-weight:700;margin-top:4px}.tile .sub{font-size:1rem;color:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}.chip{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border-radius:10px;border:1.5px solid var(--acc);color:var(--accink);background:var(--accbg);font-weight:700;text-decoration:none;font-size:1rem}
+.group-label{font-size:1rem;font-weight:700;color:var(--soft);margin:12px 0 0}
+.list{list-style:none;margin:0;padding:0}.list li{padding:10px 0;border-top:1px solid var(--line)}.list li:first-child{border-top:0}.list .who{font-weight:800}.list .meta{color:var(--soft)}
+.tag{display:inline-block;font-size:1rem;font-weight:700;border-radius:8px;padding:0 8px;border:1px solid var(--line);color:var(--soft);margin-left:6px}.tag.hot{border-color:var(--acc);color:var(--accink);background:var(--accbg)}
+.alert{border-left:4px solid var(--acc);background:var(--accbg);border-radius:10px;padding:12px 14px;margin-top:10px}.alert strong{color:var(--accink)}.alert p{margin:4px 0 0;white-space:pre-wrap}
+.field .list li,.absent-unit .list li{padding:3px 0;border-top:0}.absent-unit{padding:10px 0;border-top:1px solid var(--line)}.absent-unit:first-of-type{border-top:0}.absent-unit h3{font-size:1.05rem;margin-bottom:2px}
+.section{margin-top:30px}.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}.section-head h2{margin:0}.count{font-weight:700;color:var(--soft)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.grid>.card{margin:0}
+.unit{scroll-margin-top:16px}.unit-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.state{font-size:1rem;font-weight:700;color:var(--soft)}.kind{display:inline-block;font-size:1rem;font-weight:700;border-radius:8px;padding:0 8px;margin-right:8px;background:var(--accbg);color:var(--accink)}.head-right{display:flex;align-items:center;flex-wrap:wrap;gap:4px}.unit.missing{background:var(--field);border-style:dashed}.unit.missing .state{color:var(--accink)}.unit:target{outline:3px solid var(--acc);outline-offset:2px}
+.fields{display:grid;gap:8px}.field{padding:10px 12px;background:var(--field);border:1px solid var(--line);border-radius:10px;min-width:0}.field p{white-space:pre-wrap;margin:0}
+.nums{display:flex;flex-wrap:wrap;gap:6px 18px;font-weight:700;margin:0 0 10px}.nums span b{font-size:1.15rem}
+.blank{color:var(--soft);font-size:1rem;margin:10px 0 0}
+.photos{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.photos a{width:100px;font-size:1rem;color:var(--accink)}.photos img{display:block;width:100px;height:76px;object-fit:cover;border-radius:8px;background:var(--bg)}a{color:var(--accink)}
+svg{display:block;width:100%;height:auto;color:var(--ink)}svg text{fill:currentColor;font-family:inherit;font-size:12px}.axis{stroke:var(--line);stroke-width:1}.bar-member{fill:var(--acc)}.bar-teacher{fill:var(--bar2)}.series-overall{stroke:var(--acc)}.series-unit{stroke:var(--bar2)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:1rem;color:var(--soft);margin:8px 0}.legend i{display:inline-block;width:12px;height:12px;margin-right:6px;background:var(--acc);border-radius:3px;vertical-align:-1px}.legend .teacher,.legend .unit-line{background:var(--bar2)}
+.edu-sum{display:flex;flex-wrap:wrap;gap:8px 28px;margin:4px 0 8px}.edu-sum div{min-width:120px}.edu-sum b{display:block;font-size:1.6rem;line-height:1.25}
+select{min-height:44px;max-width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}label{font-size:1rem;color:var(--soft);font-weight:700}
+.error{background:var(--accbg);color:var(--accink);padding:14px;border-radius:10px;font-weight:700}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:3px}[hidden]{display:none!important}
+.footer{font-size:1rem;color:var(--soft);margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+@media(max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tiles .tile:first-child{grid-column:1/-1}.grid{grid-template-columns:minmax(0,1fr)}.tile{padding:14px}.tile .num{font-size:1.9rem}.card{padding:16px}.wrap{padding:18px 16px 48px}.weeknav{width:100%}.weeknav input{flex:1;min-width:0}}
+.jump{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 -4px 12px;padding:8px 4px;background:var(--bg)}.jump a{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:var(--acc);color:var(--card);font-weight:700;text-decoration:none;font-size:1.05rem}.jump a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+#zones-section,#education-section{scroll-margin-top:76px}
+</style></head><body><div class="wrap">
+<header class="top"><div><p class="eyebrow">북부산성결교회 · 주간 목양 보고</p><h1 id="title">주간 보고</h1></div>
+<nav class="weeknav" aria-label="보고 주일 바꾸기"><button type="button" id="prev" aria-label="한 주 전">‹ 전 주</button><input id="week" type="date" aria-label="보고 주일"><button type="button" id="next" aria-label="한 주 뒤">다음 주 ›</button></nav></header>
+<nav class="jump" aria-label="바로 가기"><a href="#zones-section">구역 보고</a><a href="#education-section">교육부서 보고</a></nav>
+<p id="message" class="hint" role="status" aria-live="polite"></p><div id="content"></div>
+<p class="footer">출석 추이 그래프는 교육부서 보고만 사용합니다. 다시 보낸 보고는 마지막 것만 보입니다.<br>결석 사유·기도제목은 교역자 열람용입니다. 열람 링크를 다른 분께 전달하지 마세요.</p></div>
+<script src="../config.js"></script>
+<script src="../api.js"></script>
+<script>
+// v12: 열람 열쇠(v)로 첫 화면 값을 받아 온다. 열쇠가 틀리면 안내만 보이고 멈춘다.
+NBAPI.start('report', 'dashBoot', { v: NBAPI.param('v') }, function (BOOTSTRAP) {
+if (!BOOTSTRAP) { const m = document.getElementById('message'); m.className = 'error'; m.textContent = '열람 링크가 올바르지 않거나 사용이 중지되었습니다. 담임목사님께 새 열람 링크를 받아 주세요.'; return; }
+const google = { script: { run: NBAPI.runner({ getDashboardData: (v, week) => NBAPI.get('report', 'dash', { v, week }) }) } };
+const $ = id => document.getElementById(id);
+const esc = value => String(value == null ? '' : value).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pct = n => n == null ? '확인 불가' : `${Math.round(n*10)/10}%`;
+const weekText = w => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(w || ''); return m ? `${+m[2]}월 ${+m[3]}일 주일` : '주일'; };
+const shift = (w, n) => { const d = new Date(w + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n * 7); return d.toISOString().slice(0, 10); };
+let current = BOOTSTRAP.data;
+let requestNumber = 0;
+const fieldNames = {prayer:'기도제목',note:'특이사항',newcomer:'새 친구',event:'행사·예배 내용',plan:'사역 계획·다음 주 일정',teacherState:'교사들의 현재 상태',suggest:'건의사항',next:'다음 주 일정',progress:'진행사항',absence:'결석 사유',teacherZoneNote:'교사구역 나눔·기도제목'};
+// v11 (형님 11/09): 교사구역(207~209)은 짝 교육부서 보고로, 청년부는 210구역 보고로 채운 자리다(derived). 미제출로 세지 않는다.
+const YOUTH_MEETING = '오후 청년모임 — 한 일·나눈 말씀';
+const fromTag = r => `<span class="kind">${r.kind === '부서' ? '교육부서' : '구역'}</span><span class="state">${esc(r.from)} 보고에서</span>`;
+const anchor = unit => 'u-' + current.units.findIndex(u => u.id === unit.id);
+const people = list => (list || []).length;
+
+function bars(reports) {
+  if (!reports.length) return '<p class="hint">이 주일에 들어온 교육부서 보고가 없습니다.</p>';
+  const width=Math.max(280,Math.min(560,innerWidth-68)),left=width<400?96:128,right=55,plot=width-left-right,rowH=76,height=48+reports.length*rowH;
+  let svg=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="교육부서 학생·교사 출석률, 0부터 100퍼센트" data-chart="departments">`;
+  for(let tick=0;tick<=100;tick+=width<400?50:25){const x=left+plot*tick/100;svg+=`<line class="axis" x1="${x}" x2="${x}" y1="25" y2="${height-8}"/><text x="${x}" y="16" text-anchor="middle">${tick}%</text>`;}
+  reports.forEach((r,i)=>{
+    const y=37+i*rowH, name=Array.from(r.name), chunks=[];
+    for(let k=0;k<name.length;k+=8)chunks.push(name.slice(k,k+8).join(''));
+    chunks.slice(0,3).forEach((chunk,j)=>{svg+=`<text x="${left-8}" y="${y+7+j*14}" text-anchor="end">${esc(chunk)}</text>`;});
+    [[r.attendance,'bar-member']].concat(r.noTeacher?[]:[[r.teachers,'bar-teacher']]).forEach(([a,cls],j)=>{
+      const yy=y+j*27,rate=a.rate;
+      svg+=`<rect class="${cls}" x="${left}" y="${yy}" width="${rate==null?0:plot*rate/100}" height="17" rx="4" data-rate="${rate==null?'':rate}" data-plot-width="${plot}"/><text x="${left+plot+7}" y="${yy+13}">${rate==null?'—':pct(rate)}</text>`;
+    });
+  });
+  return svg+'</svg><p class="hint">— : 재적 또는 출석 수를 확인할 수 없습니다.</p>';
+}
+
+function lineChart(data, unitId) {
+  const w=Math.max(280,Math.min(800,innerWidth-68)),h=230,left=42,right=20,top=18,bottom=40,pw=w-left-right,ph=h-top-bottom;
+  let svg=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="교육부서 최근 12주 출석률 추이, 0부터 100퍼센트" data-chart="trend">`;
+  [0,25,50,75,100].forEach(t=>{const y=top+ph*(1-t/100);svg+=`<line class="axis" x1="${left}" x2="${w-right}" y1="${y}" y2="${y}"/><text x="${left-6}" y="${y+4}" text-anchor="end">${t}%</text>`;});
+  data.trend.forEach((point,i)=>{if(w<450?[0,4,8,11].includes(i):i%2===1||i===0){const x=left+pw*i/11;svg+=`<text x="${x}" y="${h-14}" text-anchor="middle">${esc(point.week.slice(5))}</text>`;}});
+  function series(getValue,cls){
+    let segment=[];
+    const flush=()=>{if(segment.length>1)svg+=`<polyline fill="none" class="${cls}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="${segment.join(' ')}"/>`;segment=[];};
+    data.trend.forEach((point,i)=>{const rate=getValue(point);if(rate==null){flush();return;}const x=left+pw*i/11,y=top+ph*(1-rate/100);segment.push(`${x},${y}`);svg+=`<circle class="${cls}" fill="var(--card)" stroke-width="3" cx="${x}" cy="${y}" r="4" data-rate="${rate}"><title>${esc(point.week)} ${pct(rate)}</title></circle>`;});flush();
+  }
+  series(p=>p.overall,'series-overall');if(unitId)series(p=>p.units[unitId],'series-unit');
+  return svg+'</svg>';
+}
+
+const absentLines = list => (list || []).map(a => `<li><span class="who">${esc(a.name)}</span> <span class="meta">· ${esc(a.reason || '사유 미기재')}</span></li>`).join('');
+// 칸 하나. 비어 있으면 빈 문자열을 돌려주고, 카드 아래 '적지 않은 칸'에 이름만 모은다.
+function field(label, text, blanks) {
+  if (!String(text || '').trim()) { blanks.push(label); return ''; }
+  return `<div class="field"><h4>${esc(label)}</h4><p>${esc(text)}</p></div>`;
+}
+const joinText = (a, b) => [a, b].map(s => String(s || '').trim()).filter(Boolean).join('\n');
+const blankLine = blanks => blanks.length ? `<p class="blank">적지 않은 칸: ${blanks.map(esc).join(' · ')}</p>` : '';
+
+function zoneCard(r) {
+  const blanks = [];
+  const absent = r.absent.length ? `<div class="field"><h4>결석 ${r.absent.length}명</h4><ul class="list">${absentLines(r.absent)}</ul></div>` : `<div class="field"><h4>결석</h4><p>모두 출석</p></div>`;
+  const n = v => v == null ? '—' : v;
+  if (r.derived) {
+    // v11: 교사구역 — 짝 교육부서 보고의 교사 출석·교사 결석·교사구역 나눔
+    const a = r.attendance || {};
+    return `<article class="card unit" id="${anchor(r)}"><div class="unit-head"><h3>${esc(r.name)}</h3><span class="head-right">${fromTag(r)}</span></div>
+      <p class="nums"><span>교사 출석 <b>${n(a.present)}</b> / ${n(a.total)}명</span><span>결석 <b>${r.absent.length}</b>명</span></p>
+      <div class="fields">${absent}${field('교사구역 나눔·기도제목', r.note, blanks)}</div>${blankLine(blanks)}</article>`;
+  }
+  const body = absent + field(r.youth ? YOUTH_MEETING : '진행사항', r.progress, blanks) + field('특이사항', r.note, blanks) + field('건의사항', r.suggest, blanks);
+  const youth = r.youth ? `<span>청년예배 <b>${n(r.youthWorship)}</b>명</span>` : '';
+  const att = r.attendance ? `<p class="nums"><span>${r.youth ? '오전예배 ' : ''}출석 <b>${n(r.attendance.present)}</b>명</span><span>결석 <b>${r.absent.length}</b>명</span>${r.attendance.total == null ? '' : `<span class="soft">명단 ${r.attendance.total}명</span>`}${youth}</p>` : (youth ? `<p class="nums">${youth}</p>` : '');
+  return `<article class="card unit" id="${anchor(r)}"><div class="unit-head"><h3>${esc(r.name)}</h3><span class="head-right"><span class="kind">구역</span><span class="state">제출</span></span></div>${att}<div class="fields">${body}</div>${blankLine(blanks)}</article>`;
+}
+// v11: 청년부 자리 — 210구역 보고의 오전예배 출석·청년예배 인원·오후 청년모임. 자세한 내용은 210구역 카드에.
+function youthDeptCard(r) {
+  const a = r.attendance, blanks = [], n = v => v == null ? '—' : v;
+  const src = current.units.find(u => u.kind !== '부서' && u.name === r.from);
+  return `<article class="card unit" id="${anchor(r)}"><div class="unit-head"><h3>${esc(r.name)}</h3><span class="head-right">${fromTag(r)}</span></div>
+    <p class="nums"><span>오전예배 <b>${n(a.present)}</b> / ${n(a.total)}명 · ${pct(a.rate)}</span><span>청년예배 <b>${n(r.youthWorship)}</b>명</span></p>
+    <div class="fields">${field(YOUTH_MEETING, r.youthMeeting, blanks)}</div>${blankLine(blanks)}
+    ${src ? `<p class="hint">결석·특이사항은 <a href="#${anchor(src)}">${esc(r.from)} 카드</a>에 있습니다.</p>` : ''}</article>`;
+}
+// v6 교육부서 카드 — 11/07 보고 양식 그대로 묶는다: 특이사항+건의사항 한 칸, 사역 계획+다음 주 일정 한 칸.
+// 예전 보고에 따로 적힌 건의사항·다음 주 일정은 같은 칸 아래에 이어 붙인다.
+function deptCard(r) {
+  const a = r.attendance, t = r.teachers, blanks = [];
+  const n = v => v == null ? '—' : v;
+  const nums = `<p class="nums"><span>학생 <b>${n(a.present)}</b> / ${n(a.total)}명 · ${pct(a.rate)}</span>${r.noTeacher ? '<span>교사 없음</span>' : `<span>교사 <b>${n(t.present)}</b> / ${n(t.total)}명 · ${pct(t.rate)}</span>`}</p>`;
+  const abs = (label, list) => list.length ? `<div class="field"><h4>${label} 결석 ${list.length}명</h4><ul class="list">${absentLines(list)}</ul></div>` : `<div class="field"><h4>${label} 결석</h4><p>모두 출석</p></div>`;
+  const body = abs('학생', r.absent) + (r.noTeacher ? '' : abs('교사', r.teacherAbsent || []))
+    + field('행사·예배 내용', r.event, blanks) + field('사역 계획·다음 주 일정', joinText(r.plan, r.next), blanks)
+    + (r.noTeacher ? '' : field('교사들의 현재 상태', r.teacherState, blanks)) + (r.teacherZone ? field(`교사구역 나눔·기도제목 (${r.teacherZone})`, r.teacherZoneNote, blanks) : '') + field('기도제목', r.prayer, blanks)
+    + field('특이사항·건의사항', joinText(r.note, r.suggest), blanks) + field('새 친구', r.newcomer, blanks);
+  const photos = (r.photos || []).map((photo,i)=>`<a href="${esc(photo.url)}" target="_blank" rel="noreferrer"><img src="${esc(photo.thumbnail)}" alt="${esc(r.name)} 보고 사진 ${i+1}" loading="lazy" referrerpolicy="no-referrer">사진 ${i+1}</a>`).join('');
+  return `<article class="card unit" id="${anchor(r)}"><div class="unit-head"><h3>${esc(r.name)}</h3><span class="head-right"><span class="kind">교육부서</span><span class="state">제출</span></span></div>${nums}<div class="fields">${body}</div>${blankLine(blanks)}${photos?`<div class="photos">${photos}</div><p class="hint">사진이 안 보이면 원본 링크를 눌러 주세요. 사진 권한이 있는 계정이 필요합니다.</p>`:''}</article>`;
+}
+const missingCard = u => u.derivedFrom
+  ? `<article class="card unit" id="${anchor(u)}"><div class="unit-head"><h3>${esc(u.name)}</h3><span class="head-right"><span class="kind">${u.kind === '부서' ? '교육부서' : '구역'}</span><span class="state">${esc(u.from)} 보고를 기다림</span></span></div><p class="hint">따로 보고하지 않는 자리입니다. ${esc(u.from)} 보고가 들어오면 채워집니다.</p></article>`
+  : `<article class="card unit missing" id="${anchor(u)}"><div class="unit-head"><h3>${esc(u.name)}</h3><span class="head-right"><span class="kind">${u.kind === '부서' ? '교육부서' : '구역'}</span><span class="state">미제출</span></span></div></article>`;
+
+function render(data) {
+  current = data;
+  const thisSunday = data.thisSunday || data.selectedWeek;
+  $('week').value = data.selectedWeek; $('week').max = thisSunday;
+  $('next').disabled = data.selectedWeek >= thisSunday;
+  $('title').innerHTML = esc(weekText(data.selectedWeek)) + (data.selectedWeek === thisSunday ? '<span class="now">이번 주일</span>' : '');
+  const s = data.summary, byId = {};
+  data.reports.forEach(r => { byId[r.id] = r; });
+  const zoneUnits = data.units.filter(u => u.kind !== '부서'), deptUnits = data.units.filter(u => u.kind === '부서');
+  const zones = data.reports.filter(r => r.kind !== '부서'), edu = data.reports.filter(r => r.kind === '부서');
+  const none = !data.reports.length;
+  const own = data.reports.filter(r => !r.derived);   // v11: 채운 자리는 짝 보고와 같은 사람이라 결석을 두 번 세지 않는다
+  const absentTotal = own.reduce((sum, r) => sum + people(r.absent) + people(r.teacherAbsent), 0);
+  const longTerm = data.watch.filter(w => w.longTerm);
+  const shortTerm = data.watch.filter(w => !w.longTerm);
+  $('message').className = 'hint';
+  $('message').textContent = none ? '이 주일에 들어온 보고가 아직 없습니다.' : `보고서 ${own.length}개가 들어왔습니다.`;
+
+  const tile = (href, num, lab, sub, key) => `<a class="tile${key?' key':''}" href="#${href}"><div class="num">${num}</div><div class="lab">${lab}</div>${sub?`<div class="sub">${sub}</div>`:''}</a>`;
+  const dash = '—';
+  const tiles = `<section class="tiles" id="summary-section" aria-label="이번 주 숫자">
+    ${tile('missing-section', `${s.completed}<small> / ${s.expected}</small>`, '보고서 제출', `구역 ${s.zone.completed}/${s.zone.expected} · 교육부서 ${s.dept.completed}/${s.dept.expected}`, s.missing.length > 0)}
+    ${tile('watch-section', none ? dash : `${shortTerm.length}<small>명</small>`, '2주 연속 결석', none ? '보고 전' : '2~11주 · 장결자는 따로')}
+    ${tile('long-section', none ? dash : `${longTerm.length}<small>명</small>`, '장결자', '12주 이상 연속')}</section>`;
+
+  const chipList = units => units.map(u => `<a class="chip" href="#${anchor(u)}">${esc(u.name)}</a>`).join('');
+  const missZ = s.missing.filter(u => u.kind !== '부서'), missD = s.missing.filter(u => u.kind === '부서');
+  const missing = `<section class="card" id="missing-section"><h2>보고서가 아직 안 온 곳 <span class="count">${s.missing.length}</span></h2>
+    ${s.missing.length ? `${missZ.length?`<p class="group-label">구역 ${missZ.length}</p><div class="chips">${chipList(missZ)}</div>`:''}${missD.length?`<p class="group-label">교육부서 ${missD.length}</p><div class="chips">${chipList(missD)}</div>`:''}<p class="hint">이름을 누르면 아래 그 구역·부서 자리로 갑니다.</p>` : '<p>모든 구역과 교육부서가 보고를 보냈습니다.</p>'}</section>`;
+
+  const urgent = `<section class="card" id="urgent-section"><h2>먼저 살펴볼 소식 <span class="count">${data.urgent.length}건</span></h2><p class="hint">입원·수술·장례 같은 낱말이 들어간 기록입니다. 내용을 직접 확인해 주세요.</p>
+    ${data.urgent.length ? data.urgent.map(item => `<div class="alert"><strong>${esc(item.unit)} · ${fieldNames[item.field] || '소식'}</strong><p>${esc(item.text)}</p></div>`).join('') : '<p>해당 낱말이 들어간 기록이 없습니다.</p>'}</section>`;
+
+  // v9 (형님 11/08): 구역장·부장이 앱에서 명단에 넣은 분 — 이 주일 앞뒤 6일 안에 넣은 이름만, 있을 때만 보인다.
+  const added = data.newMembers || [];
+  const fresh = added.length ? `<section class="card" id="new-member-section"><h2>명단에 새로 넣은 분 <span class="count">${added.length}명</span></h2>
+    <ul class="list">${added.map(m => `<li><span class="who">${esc(m.name)}</span><span class="tag">${esc(m.unit)} · ${esc(m.role === '학생' ? '아이' : m.role === '교사' ? '선생님' : '구역원')}</span><br><span class="meta">${esc(m.addedOn.slice(5).replace('-', '/').replace(/^0/, ''))} · ${esc(m.by || '보고자')} 님이 넣음</span></li>`).join('')}</ul>
+    <p class="hint">구역장·부장이 보고 화면에서 넣은 이름입니다. 잘못 들어간 이름은 구글 시트 '명단' 탭에서 그 줄을 지우시면 됩니다.</p></section>` : '';
+
+  const absentUnits = own.filter(r => people(r.absent) + people(r.teacherAbsent));
+  const absent = `<section class="card" id="absent-section"><h2>결석하신 분과 사유 <span class="count">${none ? '보고 전' : absentTotal + '명'}</span></h2>
+    ${none ? '<p class="hint">보고가 들어오면 여기에 모입니다.</p>' : absentUnits.length ? absentUnits.map(r => `<div class="absent-unit"><h3>${esc(r.name)}</h3>${r.kind === '부서' ? `${people(r.absent)?`<p class="group-label">학생</p><ul class="list">${absentLines(r.absent)}</ul>`:''}${people(r.teacherAbsent)?`<p class="group-label">교사</p><ul class="list">${absentLines(r.teacherAbsent)}</ul>`:''}` : `<ul class="list">${absentLines(r.absent)}</ul>`}</div>`).join('') : '<p>보고한 곳 모두 결석이 없습니다.</p>'}
+    <p class="hint">구역 결석은 구역장이 적은 인원입니다. 같은 분이 구역과 부서에 함께 적힐 수 있습니다.</p></section>`;
+
+  const watchItem = w => `<li><span class="who">${esc(w.name)}</span><span class="tag${w.weeks >= 3 ? ' hot' : ''}">${w.weeks}주째</span><span class="tag">${esc(w.unit)} · ${esc(w.role)}</span><br><span class="meta">이번 주 사유: ${esc(w.reason || '미기재')}</span></li>`;
+  const watch = `<section class="card" id="watch-section"><h2>2주 이상 연속 결석 <span class="count">${none ? '보고 전' : shortTerm.length + '명'}</span></h2>
+    ${none ? '<p class="hint">이 주일 보고가 들어와야 셀 수 있습니다. 지난 주일은 위의 ‹ 전 주 단추로 볼 수 있습니다.</p>' : shortTerm.length ? `<ul class="list">${shortTerm.map(watchItem).join('')}</ul>` : '<p>2~11주 연속 결석하신 분이 없습니다.</p>'}
+    <h2 id="long-section" style="margin-top:20px">장결자 · 12주 이상 <span class="count">${none ? '보고 전' : longTerm.length + '명'}</span></h2>
+    ${none ? '' : longTerm.length ? `<ul class="list">${longTerm.map(watchItem).join('')}</ul>` : '<p>12주 이상 연속 결석하신 분이 없습니다.</p>'}
+    <p class="hint">같은 구역·부서, 같은 역할에서 이 주일까지 이어진 결석입니다. 보고가 빠진 주가 있으면 이어서 세지 않습니다. 이름 없이 직접 적은 기록은 빼고 셉니다.</p></section>`;
+
+  const zoneSec = `<section class="section" id="zones-section"><div class="section-head"><h2>구역 보고</h2><span class="count">보고서 ${s.zone.completed} / ${s.zone.expected}</span></div>
+    ${zoneUnits.length ? `<div class="grid">${zoneUnits.map(u => byId[u.id] ? zoneCard(byId[u.id]) : missingCard(u)).join('')}</div>` : '<p class="card hint">등록된 구역이 없습니다.</p>'}</section>`;
+
+  const d = s.dept;
+  const eduSec = `<section class="section" id="education-section"><div class="section-head"><h2>교육부서 보고</h2><span class="count">보고서 ${d.completed} / ${d.expected}</span></div>
+    <article class="card"><h3>출석 현황</h3><div class="edu-sum"><div><b>${edu.length ? d.present : '—'} / ${edu.length ? d.total : '—'}</b><span class="soft">학생·교사 출석 / 재적 (명)</span></div><div><b>${pct(d.rate)}</b><span class="soft">출석률 · 보고한 부서 기준</span></div><div><b>${s.newcomerItems}건</b><span class="soft">새 친구 기록</span></div></div>
+      <p class="hint">학생과 교사를 합한 값입니다.${d.completeCounts ? '' : ' 비어 있는 숫자가 있어 합계가 모자랄 수 있습니다.'}</p><div class="legend"><span><i></i>학생</span><span><i class="teacher"></i>교사</span></div>${bars(edu)}</article>
+    <article class="card"><div class="section-head" style="margin-bottom:6px"><h3>최근 12주 출석률</h3><div><label for="trend-unit">함께 볼 부서 </label><select id="trend-unit"><option value="">교육부서 합계만</option>${deptUnits.map(u => `<option value="${esc(u.id)}">${esc(u.name)}</option>`).join('')}</select></div></div>
+      <div class="legend"><span><i></i>교육부서 합계</span><span><i class="unit-line"></i>고른 부서</span></div><div id="trend-chart">${lineChart(data, '')}</div><p class="hint">보고가 없거나 재적을 알 수 없는 주는 선을 잇지 않습니다.</p><p id="trend-values" class="hint">${data.trend.map(p => `${esc(p.week.slice(5))}: ${pct(p.overall)}`).join(' · ')}</p></article>
+    ${deptUnits.length ? `<div class="grid">${deptUnits.map(u => byId[u.id] ? (byId[u.id].derived ? youthDeptCard(byId[u.id]) : deptCard(byId[u.id])) : missingCard(u)).join('')}</div>` : ''}</section>`;
+
+  const prayers = `<section class="section card" id="prayer-section"><h2>교육부서 기도제목</h2>${data.prayers.length ? `<ul class="list">${data.prayers.map(p => `<li><span class="who">${esc(p.unit)}</span><p style="white-space:pre-wrap;margin:2px 0 0">${esc(p.text)}</p></li>`).join('')}</ul>` : '<p class="hint">이 주일에 적힌 교육부서 기도제목이 없습니다.</p>'}</section>`;
+
+  $('content').innerHTML = tiles + missing + urgent + fresh + absent + watch + zoneSec + eduSec + prayers;
+  $('trend-unit').addEventListener('change', e => {
+    $('trend-chart').innerHTML = lineChart(current, e.target.value);
+    $('trend-values').textContent = current.trend.map(p => `${p.week.slice(5)}: 합계 ${pct(p.overall)}${e.target.value ? ' / 고른 부서 ' + pct(p.units[e.target.value]) : ''}`).join(' · ');
+  });
+}
+
+function load(date) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || new Date(date + 'T00:00:00Z').getUTCDay() !== 0) { $('message').className = 'error'; $('message').textContent = '주일(일요일) 날짜를 골라 주세요.'; return; }
+  const id = ++requestNumber; $('content').hidden = true; $('message').className = 'hint'; $('message').textContent = '보고를 불러오는 중입니다…';
+  google.script.run.withSuccessHandler(data => { if (id !== requestNumber) return; render(data); $('content').hidden = false; })
+    .withFailureHandler(() => { if (id !== requestNumber) return; $('content').hidden = true; $('message').className = 'error'; $('message').textContent = '보고를 열 수 없습니다. 열람 링크와 연결 상태를 확인해 주세요.'; })
+    .getDashboardData(BOOTSTRAP.key, date);
+}
+$('week').addEventListener('change', () => load($('week').value));
+$('prev').addEventListener('click', () => load(shift(current.selectedWeek, -1)));
+$('next').addEventListener('click', () => load(shift(current.selectedWeek, 1)));
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  e.preventDefault();
+  const target = document.getElementById(a.getAttribute('href').slice(1));
+  if (target) target.scrollIntoView({ block: 'start' });
+});
+render(current);
+});
+</script></body></html>
