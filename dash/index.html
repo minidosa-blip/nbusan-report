@@ -7,6 +7,7 @@
 <!-- v13 (형님 11/09 12:1x·12:2x): '보고서가 아직 안 온 곳'을 없애고 모든 구역·교육부서를 한 줄씩 '제출(보낸 시각)/미제출'로 보이는 '보고 현황' 목록으로 바꿈. 카드 머리에는 상태 한 낱말('제출'/'미제출')만 — 구역/교육부서 이름표 없음. -->
 <!-- v11 (형님 11/09): 교사구역 207~209는 짝 교육부서 보고로, 청년부는 210구역 보고로 채운 자리 — 미제출로 세지 않고 '○○ 보고에서'로 표시. 210구역 카드에 청년예배 인원·오후 청년모임. -->
 <!-- v7 (형님 11/08 오후): 보고 화면(구역·부서)과 같은 색 톤 — 따뜻한 무채색 바탕·흰 카드·강조색 하나. 구역 카드에 출석·결석 인원. 카드마다 구역/교육부서 이름표. 이 파일에는 슬래시-별표 주석을 쓰지 않는다. -->
+<!-- v21 (형님 11/15 TG: 사진을 누르면 한 장만 뜨고 넘겨보기가 안 되며, X를 누르면 구글 드라이브 목록이 뜸): 사진을 구글 드라이브로 보내지 않고 이 화면 안에서 크게 띄운다. 좌우로 밀거나 ‹ › 버튼·키보드 화살표로 넘기고, × 또는 바깥을 누르면 닫혀 보고 화면으로 돌아온다. -->
 <style>
 :root{color-scheme:light;--bg:#f6f2ee;--card:#fff;--ink:#2b221d;--soft:#5d5048;--line:#e5dcd4;--field:#fbf9f7;--acc:#a8402a;--accbg:#f8ebe6;--accink:#8a3220;--ok:#1b6a3c;--okbg:#d3f1de;--okline:#249a58;--bar2:#8b8078;--shadow:0 1px 3px rgba(60,40,30,.07)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#16120f;--card:#211b18;--ink:#f3ece6;--soft:#c3b5aa;--line:#3b312b;--field:#1b1613;--acc:#ee9a80;--accbg:#3a2620;--accink:#ffc6b4;--ok:#9fe0b8;--okbg:#1d3326;--okline:#5fb486;--bar2:#8f847b;--shadow:none}}
@@ -56,6 +57,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 @media(max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tiles .tile:first-child{grid-column:1/-1}.grid{grid-template-columns:minmax(0,1fr)}.tile{padding:14px}.tile .num{font-size:1.9rem}.card{padding:16px}.wrap{padding:18px 16px 48px}.weeknav{width:100%}.weeknav input{flex:1;min-width:0}}
 .jump{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 -4px 12px;padding:8px 4px;background:var(--bg)}.jump a{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:var(--acc);color:var(--card);font-weight:700;text-decoration:none;font-size:1.05rem}.jump a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 #zones-section,#education-section{scroll-margin-top:76px}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;touch-action:pan-y}.lb[hidden]{display:none}.lb img{max-width:100vw;max-height:84vh;object-fit:contain;user-select:none;-webkit-user-drag:none}.lb button{position:absolute;background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:50%;width:48px;height:48px;font-size:28px;line-height:48px;cursor:pointer}.lb .lx{top:calc(env(safe-area-inset-top,0px) + 12px);right:12px}.lb .lp{left:8px;top:50%;transform:translateY(-50%)}.lb .ln{right:8px;top:50%;transform:translateY(-50%)}.lb .lc{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);left:0;right:0;text-align:center;color:#fff;font-size:1rem}.lb .lm{color:#fff;padding:24px;text-align:center}
 </style></head><body><div class="wrap">
 <header class="top"><div><p class="eyebrow">북부산성결교회 · 주간 목양 보고</p><h1 id="title">주간 보고</h1></div>
 <nav class="weeknav" aria-label="보고 주일 바꾸기"><button type="button" id="prev" aria-label="한 주 전">‹ 전 주</button><input id="week" type="date" aria-label="보고 주일"><button type="button" id="next" aria-label="한 주 뒤">다음 주 ›</button></nav></header>
@@ -183,8 +185,8 @@ function deptCard(r) {
     + field('행사·예배 내용', r.event, blanks) + field('사역 계획·다음 주 일정', joinText(r.plan, r.next), blanks)
     + (r.noTeacher ? '' : field('교사들의 현재 상태', r.teacherState, blanks)) + (r.teacherZone ? field(`교사구역 나눔·기도제목 (${r.teacherZone})`, r.teacherZoneNote, blanks) : '') + field('기도제목', r.prayer, blanks)
     + field('특이사항·건의사항', joinText(r.note, r.suggest), blanks) + field('새 친구', r.newcomer, blanks);
-  const photos = (r.photos || []).map((photo,i)=>`<a href="${esc(photo.url)}" target="_blank" rel="noreferrer"><img src="${esc(photo.thumbnail)}" alt="${esc(r.name)} 보고 사진 ${i+1}" loading="lazy" referrerpolicy="no-referrer">사진 ${i+1}</a>`).join('');
-  return `<article class="card unit" id="${anchor(r)}"><div class="unit-head"><h3>${esc(r.name)}</h3><span class="head-right">${stateTag(true)}</span></div>${nums}<div class="fields">${body}</div>${blankLine(blanks)}${photos?`<div class="photos">${photos}</div><p class="hint">사진이 안 보이면 원본 링크를 눌러 주세요. 사진 권한이 있는 계정이 필요합니다.</p>`:''}</article>`;
+  const photos = (r.photos || []).map((photo,i)=>`<a href="${esc(photo.url)}" class="ph" data-g="${anchor(r)}" data-big="${esc(String(photo.thumbnail||'').replace(/sz=w\d+/, 'sz=w1600'))}" target="_blank" rel="noreferrer"><img src="${esc(photo.thumbnail)}" alt="${esc(r.name)} 보고 사진 ${i+1}" loading="lazy" referrerpolicy="no-referrer">사진 ${i+1}</a>`).join('');
+  return `<article class="card unit" id="${anchor(r)}"><div class="unit-head"><h3>${esc(r.name)}</h3><span class="head-right">${stateTag(true)}</span></div>${nums}<div class="fields">${body}</div>${blankLine(blanks)}${photos?`<div class="photos">${photos}</div><p class="hint">사진을 누르면 크게 보이고, 옆으로 밀어 다음 사진을 볼 수 있습니다.</p>`:''}</article>`;
 }
 const missingCard = u => u.derivedFrom
   ? `<article class="card unit" id="${anchor(u)}"><div class="unit-head"><h3>${esc(slotName(u))}</h3><span class="head-right">${stateTag(false)}</span></div><p class="hint">따로 보고하지 않는 자리입니다. ${esc(u.from)} 보고가 들어오면 채워집니다.</p></article>`
@@ -276,6 +278,42 @@ function load(date) {
 $('week').addEventListener('change', () => load($('week').value));
 $('prev').addEventListener('click', () => load(shift(current.selectedWeek, -1)));
 $('next').addEventListener('click', () => load(shift(current.selectedWeek, 1)));
+// v21: 사진 크게 보기 — 이 화면 안에서 띄우고 넘겨 본다(구글 드라이브로 나가지 않음).
+const LB = (() => {
+  const box = document.createElement('div'); box.className = 'lb'; box.hidden = true;
+  box.innerHTML = '<img alt=""><p class="lm" hidden>사진을 불러오지 못했습니다.</p><button type="button" class="lp" aria-label="이전 사진">‹</button><button type="button" class="ln" aria-label="다음 사진">›</button><button type="button" class="lx" aria-label="닫기">×</button><p class="lc"></p>';
+  document.body.appendChild(box);
+  const img = box.querySelector('img'), msg = box.querySelector('.lm'), cnt = box.querySelector('.lc'), bp = box.querySelector('.lp'), bn = box.querySelector('.ln');
+  let list = [], at = 0, sx = null, sy = 0;
+  function show(i) {
+    at = (i + list.length) % list.length; msg.hidden = true; img.hidden = false;
+    img.src = list[at]; cnt.textContent = list.length > 1 ? (at + 1) + ' / ' + list.length : '';
+    bp.hidden = bn.hidden = list.length < 2;
+  }
+  img.addEventListener('error', () => { img.hidden = true; msg.hidden = false; });
+  function close() { box.hidden = true; img.removeAttribute('src'); document.body.style.overflow = ''; }
+  bp.addEventListener('click', e => { e.stopPropagation(); show(at - 1); });
+  bn.addEventListener('click', e => { e.stopPropagation(); show(at + 1); });
+  box.querySelector('.lx').addEventListener('click', e => { e.stopPropagation(); close(); });
+  box.addEventListener('click', e => { if (e.target === box) close(); });
+  box.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  box.addEventListener('touchend', e => {
+    if (sx === null) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) && list.length > 1) show(at + (dx < 0 ? 1 : -1));
+  });
+  document.addEventListener('keydown', e => {
+    if (box.hidden) return;
+    if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') show(at - 1); else if (e.key === 'ArrowRight') show(at + 1);
+  });
+  return { open(urls, i) { list = urls; box.hidden = false; document.body.style.overflow = 'hidden'; show(i); } };
+})();
+document.addEventListener('click', e => {
+  const a = e.target.closest('a.ph');
+  if (!a || !a.dataset.big) return;
+  e.preventDefault();
+  const group = Array.from(document.querySelectorAll('a.ph')).filter(x => x.dataset.g === a.dataset.g);
+  LB.open(group.map(x => x.dataset.big), group.indexOf(a));
+});
 document.addEventListener('click', e => {
   const a = e.target.closest('a[href^="#"]');
   if (!a) return;
