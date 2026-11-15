@@ -284,5 +284,7 @@ document.addEventListener('click', e => {
   if (target) target.scrollIntoView({ block: 'start' });
 });
 render(current);
+// v15: 저장해 둔 값으로 먼저 그렸을 때, 새 값이 오면 처음 주일을 보고 있는 동안에만 다시 그린다.
+return function (B) { if (B && B.data && current === BOOTSTRAP.data) render(B.data); };
 });
 </script></body></html>
