@@ -471,7 +471,7 @@ function sharedHtml(list) {
 }
 function renderOverview(d) {
   const box = document.getElementById('p-overview-body');
-  const isDept = d.unit.kind === '부서', r = d.report;
+  const isDept = d.unit.kind === '부서' && !REP.youth, r = d.report;   // v14 (형님 11/15): 청년부 = 청년 양식
   if (!d.availableWeeks.length || !r) { box.innerHTML = emptyHtml(UNIT_WORD) + sharedHtml(d.shared); return; }
   const absentNow = r.absent.length + (r.teacherAbsent || []).length;
   const stat = (n, l, cls) => `<div class="stat"><div class="number${cls ? ' ' + cls : ''}">${n}</div><div class="label">${l}</div></div>`;
@@ -513,7 +513,7 @@ function loadHistory() {
     .getMyHistory(REP.k);
 }
 function reportBody(r) {
-  if (r.kind === '부서') {
+  if (r.kind === '부서' && !r.youth) {   // v14: 청년부 청년 보고는 아래 청년 모양
     const a = r.attendance, t = r.teachers;
     return `<div class="field"><h4>🧒 아이들 출석</h4><p>${a.present == null ? '—' : a.present} / ${a.total == null ? '—' : a.total}명 · ${pct(a.rate)}</p></div>
       ${r.noTeacher ? '' : `<div class="field"><h4>🍎 선생님 출석</h4><p>${t.present == null ? '—' : t.present} / ${t.total == null ? '—' : t.total}명 · ${pct(t.rate)}</p></div>`}
@@ -540,12 +540,13 @@ let UNIT_WORD = '구역';
 if (!REP) {
   app.innerHTML = `<div class="hero">${ART_ZONE}<div><h1>북부산성결교회 보고</h1></div></div><div class="card">링크가 올바르지 않습니다.<br>담임목사님께 받은 개인 링크로 다시 열어 주세요.</div>`;
 } else {
-  const isDept = String(REP.kind).trim() === '부서';
-  UNIT_WORD = isDept ? '부서' : '구역';
+  // v14 (형님 11/15): 청년부가 청년 보고의 주인 — 종류는 부서지만 양식은 v11 청년 보고(오전예배·청년예배·오후 청년모임) 그대로.
+  const isDept = String(REP.kind).trim() === '부서' && !REP.youth;
+  UNIT_WORD = String(REP.kind).trim() === '부서' ? '부서' : '구역';
   const members = (REP.roster && REP.roster.members) || [];
   const teachers = (REP.roster && REP.roster.teachers) || [];
   const noTeacher = isDept && !!REP.noTeacher;   // v9 (형님 11/08): 청년부는 교사가 따로 없다
-  const youth = !isDept && !!REP.youth;   // v11 (형님 11/09): 210구역 = 청년 보고
+  const youth = !!REP.youth;   // v11 (형님 11/09): 210구역 = 청년 보고 · v14: 청년부
   const ZONE_TITLE = icon('👥') + (youth ? '오전예배 출석' : '구역원 출석');
   // v13: 사진 하나 = { name, status: 'wait'(준비 중) | 'ok'(준비됨) | 'fail'(읽지 못함), data, type, url }
   let photos = [], photoGen = 0, photoNote = '', sending = false, sendLabel = '보고 보내기';

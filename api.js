@@ -5,9 +5,13 @@
 //   읽기 = GET  …/exec?api=이름&…           쓰기 = POST …/exec, 본문 = JSON 글자, Content-Type = 'text/plain;charset=utf-8'
 //   그 밖의 머리글(Authorization, X-…, application/json 등)을 넣으면 브라우저가 먼저 OPTIONS로 묻는데,
 //   Apps Script는 그 물음에 답하지 못해 요청이 막힌다(마스터 11/09 실측: application/json POST = 막힘).
+// v14 (형님 11/15: 링크가 바로 안 열린다): 읽기(GET)만 12초 안에 답이 없으면 끊고 한 번만 다시 묻는다(Apps Script가 가끔 멈춘다 — 실측 2분 넘게
+//   답 없음). 다시 묻는 동안 '불러오는 중' 글을 바꾼다. 쓰기(POST: 보고·사진·이름 더하기)는 절대 다시 보내지 않는다 — 두 번 접수될 수 있다.
 (function (G) {
   'use strict';
   var CT = 'text/plain;charset=utf-8';
+  var GET_TIMEOUT_MS = 12000;   // v14
+  var RETRY_TEXT = '조금 더 걸리고 있습니다. 다시 불러오는 중…';   // v14
 
   // 링크의 값: #k=… 또는 ?k=… (둘 다 받는다. # 뒤는 어떤 서버로도 가지 않는다)
   function param(name) {
@@ -27,7 +31,7 @@
     return cfg.REPORT_API || '';
   }
 
-  function call(kind, action, params, isPost) {
+  function call(kind, action, params, isPost, onRetry) {
     var url = base(kind);
     if (!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url) || /REPLACE_WITH/.test(url)) {
       return Promise.reject(new Error('연결 주소가 아직 설정되지 않았거나 링크가 잘렸습니다. 받으신 링크 전체로 다시 열어 주세요.'));
@@ -43,15 +47,41 @@
       Object.keys(params || {}).forEach(function (k) { var v = params[k]; if (v !== undefined && v !== null && v !== '') q.set(k, String(v)); });
       url += '?' + q.toString();
     }
-    return G.fetch(url, opts).then(function (r) {
-      if (!r.ok) throw new Error('서버가 응답하지 않습니다(' + r.status + '). 잠시 뒤 다시 눌러 주세요.');
-      return r.json().catch(function () { throw new Error('서버 답을 읽지 못했습니다. 잠시 뒤 다시 눌러 주세요.'); });
-    }, function () {
-      throw new Error('인터넷 연결을 확인하고 다시 눌러 주세요.');
-    }).then(function (j) {
+    // v14: 한 번 묻기. GET은 GET_TIMEOUT_MS 뒤 끊는다. 실패의 종류(retry=다시 물어도 되는 실패)를 붙여 돌려준다.
+    function once() {
+      var o = Object.assign({}, opts), timer = null, ctl = null;
+      if (!isPost && typeof G.AbortController === 'function') {
+        ctl = new G.AbortController(); o.signal = ctl.signal;
+        timer = G.setTimeout(function () { ctl.abort(); }, GET_TIMEOUT_MS);
+      }
+      var done = function () { if (timer) G.clearTimeout(timer); };
+      return G.fetch(url, o).then(function (r) {
+        done();
+        if (!r.ok) { var e1 = new Error('서버가 응답하지 않습니다(' + r.status + '). 잠시 뒤 다시 눌러 주세요.'); e1.retry = true; throw e1; }
+        return r.json().catch(function () { var e2 = new Error('서버 답을 읽지 못했습니다. 잠시 뒤 다시 눌러 주세요.'); e2.retry = true; throw e2; });
+      }, function () {
+        done();
+        var e3 = new Error(ctl && ctl.signal.aborted ? '서버가 늦게 답하고 있습니다. 잠시 뒤 다시 눌러 주세요.' : '인터넷 연결을 확인하고 다시 눌러 주세요.'); e3.retry = true; throw e3;
+      });
+    }
+    var first = once();
+    var answered = isPost ? first : first.catch(function (e) {
+      if (!e.retry) throw e;
+      showRetry(onRetry);
+      return once();   // v14: 딱 한 번만 다시
+    });
+    return answered.then(function (j) {
       if (!j || j.ok !== true) throw new Error((j && j.error) || '알 수 없는 오류입니다.');
       return j.data;
     });
+  }
+
+  // v14: 다시 묻는 중이라는 것을 보이는 곳 — 부른 쪽이 준 함수, 그리고 화면의 '불러오는 중' 글(.loading p).
+  function showRetry(onRetry) {
+    try {
+      if (typeof onRetry === 'function') onRetry(RETRY_TEXT);
+      Array.prototype.forEach.call(G.document.querySelectorAll('.loading p'), function (p) { p.textContent = RETRY_TEXT; });
+    } catch (_) { return; }   // 글을 못 바꿔도 다시 묻기는 그대로
   }
 
   // google.script.run 과 같은 모양 — 화면 코드는 그대로 .withSuccessHandler(f).withFailureHandler(g).함수(값) 를 쓴다.
@@ -81,7 +111,7 @@
     box.style.cssText = 'max-width:560px;margin:24px auto;padding:18px 16px;font:17px/1.6 "Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;text-align:center';
     box.textContent = '불러오는 중입니다…';
     G.document.body.insertBefore(box, G.document.body.firstChild);
-    call(kind, action, params, false).then(function (data) {
+    call(kind, action, params, false, function (t) { box.textContent = t; }).then(function (data) {
       box.remove();
       cb(data);
     }, function (e) {
